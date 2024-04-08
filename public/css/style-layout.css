@@ -1,0 +1,172 @@
+/* Biến */
+:root{
+  --primary-color: #f15e2c
+}
+html{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+} 
+*{
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Thiết lập chiều cao tối thiểu của body là 100% chiều cao của viewport */
+  margin: 0;
+}
+
+.content {
+  flex: 1; /* Phần nội dung sẽ mở rộng để lấp đầy không gian còn trống */
+}
+
+.footer {
+  flex-shrink: 0; /* Footer không bị co lại */
+}
+
+.header-nav1{
+  height: 30px;
+  width: 100%;
+  background-color: #303030;
+}
+
+.header-nav1-list{
+  margin-right: 3%;
+}
+
+.nav1-list__item{
+  float: right;
+  margin: 0 10px;
+  list-style-type: none;
+}
+.nav1-list__item a:hover{
+  color: var(--primary-color);
+}
+.nav1-list__item a{
+  display: inline-block;
+  font-size: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+.nav1-list__item img{
+  margin: 0 6px;
+  vertical-align: middle;
+}
+.nav1-list__item span{
+  display: inline-block;
+  line-height: 40px;
+}
+/* css for nav2 */
+.header-nav2{
+  padding: 8px 0;
+ display: flex;
+ justify-content: space-around;
+ height: 112px;
+ align-items: center;
+}
+
+
+.header-nav2-list{
+  padding-top: 50px;
+  display: flex;
+  list-style-type: none;
+}
+
+.nav2-list__item{
+ margin: 0 38px;
+ position: relative;
+}
+
+.nav2-list__item:not(:last-child)::after{
+  top: 22%;
+  right: -35px;
+  content: "";
+  position: absolute;
+  height: 1.3rem;
+  border: solid #e3e2e2 1px;
+  transform: translateY(-50%);
+  cursor: default;
+}
+.nav2-list__item img{
+  position: relative;
+    top: -19px;
+    width: 98px;
+}
+.nav2-list__item a{
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  font-size: 23px;
+}
+.nav2-list__item a:hover{
+  color: var(--primary-color);
+}
+
+.nav2-search-wrap img{
+  position: relative;
+    top: 9px;
+    left: 32px;
+}
+.nav2-search-wrap input{
+  padding-left: 34px;
+  font-size: 12px;
+  height: 36px;
+  width: 242px;
+  border: 1px solid #ccc;
+}
+input:focus {
+  outline: none; /* Loại bỏ đường viền */
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+/* css for hot news */
+.hot-news{
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+
+
+.hot-new-main a{
+ text-decoration: none;
+ color: #303030;
+}
+
+/* css for footer */
+.footer{
+  background-color: #4c4c4c;
+  height:360px ;
+}
+.cotainer{
+  width: 90%;
+  margin: 0 auto;
+ padding-top: 50px;
+}
+.footer-info-title{
+  color: #fff;
+  margin-bottom: 20px;
+}
+.footer-info-list{
+  list-style: none;
+  
+}
+.footer-info-item a{
+  color: #cccccc;
+  text-decoration: none;
+}
+.footer-info-item{
+  margin: 10px 0;
+}
+.footer-logo img{
+  position: relative;
+  top: 16px;
+  left: -51px;
+}
+.footer-info-item a:hover{
+  color: var(--primary-color);
+}

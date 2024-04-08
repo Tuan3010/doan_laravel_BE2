@@ -1,0 +1,76 @@
+.left-cate-title-list{
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+}
+.product-list{
+  padding: 40px 0;
+}
+.left-cate-title-item{
+  position: relative;
+  
+}
+.left-cate-title-item:not(:last-child):after{
+  top: 50%;
+  right: 0;
+  content: "";
+  position: absolute;
+  height: 1.3rem;
+  border: solid #e3e2e2 1px;
+  transform: translateY(-50%);
+  cursor: default;
+}
+
+.left-cate-title-item a{
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 15px;
+  font-size: 20px;
+  color: black;
+}
+.left-cate-main{
+  padding: 20px;
+}
+.left-cate-main-item{
+  margin-left: 24px;
+  list-style-type: none;
+  padding: 10px 0;
+}
+
+.left-cate-main-item a{
+  text-decoration: none;
+  color: black;
+}
+.left-cate-main-title{
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 16px 0;
+  display: block;
+}
+.warp-item-form-drive{
+  background: url(https://ananas.vn/wp-content/themes/ananas/fe-assets/images/bg_divider.png) repeat-x 8px;
+    height: 2px;
+    margin: 10px 2px;
+}
+.product-item{
+  text-align: center;
+}
+.product-item h4 a{
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.product-item h4 a:hover{
+  
+  color: var(--primary-color);
+}
+.product-item span{
+  font-weight: 600;
+}
+/*  */
+.search-product{
+  padding: 40px 0;
+}

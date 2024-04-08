@@ -1,0 +1,45 @@
+.adore-list-title{
+  padding: 36px 0;
+  text-align: center;
+}
+.product-list-adore{
+  padding-top: 40px;
+}
+.media{
+  display: flex;
+}
+.media-left{
+  padding-right: 30px ;
+}
+.product-name{
+  margin-bottom: 50px;
+  
+}
+.product-name a{
+  text-decoration: none;
+  color: black;
+
+}
+
+.price-product{
+  display: block;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.status{
+  display: block;
+  margin-bottom: 20px;
+}
+.media2{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.btn-del{
+  background-color: black;
+  padding: 10px 60px;
+  display: inline-block;
+}

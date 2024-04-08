@@ -1,0 +1,98 @@
+
+/* css for content */
+.event{
+  padding-top: 80px;
+}
+.event-list{
+  display: flex;
+  margin: 0 -16px;
+}
+.item-event{
+  height: auto;
+  flex: 1;
+  padding: 0 16px;
+}
+
+.item-event h3{
+  padding: 30px 0 10px 0;
+}
+.item-event a{
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  
+}
+.item-event a:hover{
+  color: var(--primary-color);
+}
+.item-event p{
+  line-height: 26px;
+}
+.cate-buy{
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+.cate-buy-list{
+  display: flex;
+  margin: 0 -8px;
+}
+.item-cate-buy{
+  padding: 0 8px;
+  position: relative;
+}
+.item-cate-buy img{
+  filter: brightness(70%);
+}
+.cate-buy h3{
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 40px;
+}
+.warp-cate{
+  text-align: center;
+  top: 37%;
+  left: 36%;
+  transform: translateY(-50%);
+  position: absolute;
+}
+.warp-cate h4{
+  font-size: 22px;
+  padding-bottom: 5px;
+}
+.warp-cate a{
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 5px 0;
+  display: block;
+}
+.item-cate-buy .warp-cate a:hover{
+  color: var(--primary-color);
+}
+
+.article-social{
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.article-social-title{
+  text-align: center;
+  font-size: 28px;
+}
+.artical-item{
+  margin-top: 22px;
+}
+.artical-item h3{
+  padding: 10px 0;
+}
+.artical-item h3 a{
+  text-decoration: none;
+  color: black;
+  
+}
+.artical-item h3 a:hover{
+  color: var(--primary-color);
+}
+.artical-item a{
+  text-decoration: none;
+  color: var(--primary-color);
+}

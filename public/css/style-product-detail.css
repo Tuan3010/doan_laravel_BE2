@@ -1,0 +1,68 @@
+.img-product-list{
+  margin-top: 8px;
+}
+.product-detail{
+  padding: 40px 0;
+}
+.line{
+  background: url(https://ananas.vn/wp-content/themes/ananas/fe-assets/images/bg_divider.png) repeat-x 8px;
+    height: 2px;
+    margin: 10px 2px;
+}
+.warp-right-name-product{
+  font-size: 28px;
+}
+
+.btn-add-cart{
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  background-color: black;
+  border: none;
+  width: 100%;
+  padding: 16px 10px;
+  margin: 20px 0;
+}
+.btn-submit{
+  width: 85%;
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 16px 10px;
+}
+.warp-right span{
+  margin-bottom: 10px;
+  display: block;
+  margin-right: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.warp-right select{
+  border: 1px solid #ccc;
+  margin-bottom: 26px;
+  font-size: 16px;
+  padding: 10px 20px;
+  width: 50%;
+}
+.warp-right .warp-right-price{
+  color: var(--primary-color);
+  padding: 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.btn-like{
+  padding: 13px 16px;
+  background-color: black;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: -57px;
+}
+.des-product-title{
+  padding: 20px 0;
+  font-size: 20px;
+  color: var(--primary-color);
+}
