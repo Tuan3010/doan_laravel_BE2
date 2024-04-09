@@ -1,0 +1,43 @@
+
+.bg-grey{
+  background-color: #f2f2f2;
+
+}
+.result-search-order span{
+  display: block;
+  padding: 6px 0;
+  color: #808080;
+}
+.result-search-order-title{
+  padding: 20px 0;
+  text-align: center;
+}
+.result-search-order-title a{
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.result-search-order .result-search-order-slogan{
+  padding: 10px 0;
+  display: block;
+  text-align: center;
+  color: var(--primary-color);
+}
+.result-search-order .item{
+  margin: 20px 0;
+}
+
+.line{
+  background: url(https://ananas.vn/wp-content/themes/ananas/fe-assets/images/bg_divider.png) repeat-x 8px;
+    height: 2px;
+    margin: 10px 2px;
+}
+.item-product-wrap{
+  padding: 10px;
+  width: 590px;
+  height: 200px;
+  overflow-y: auto;
+}
+.item-product{
+  padding-bottom: 10px;
+}

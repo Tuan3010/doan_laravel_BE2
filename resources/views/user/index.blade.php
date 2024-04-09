@@ -1,7 +1,8 @@
 
  @extends('layout')
  @section('content')
-  <link rel="stylesheet" href="css/style_index.css"> 
+  <link rel="stylesheet" href="css/style-index.css"> 
+  
  <!-- Content -->
   <div class="banner">
     <a href="">

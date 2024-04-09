@@ -32,6 +32,9 @@ class userController extends Controller
         return view('user/search-product');
     }
     public function searchOrderForm(){
-        return view('user/search-product');
+        return view('user/search-order');
+    }
+    public function resultsearchOrderForm(){
+        return view('user/result-search-order');
     }
 }

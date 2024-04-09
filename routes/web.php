@@ -24,6 +24,7 @@ Route::get('/product-detail', [userController::class, 'productDetailForm'])->nam
 Route::get('/product-list', [userController::class, 'productListForm'])->name('user/product-list');
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
+Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
 // Admin
 Route::get('admin/product/list',[productController::class, 'index']);
 Route::get('admin/product/create',[productController::class, 'create']);
