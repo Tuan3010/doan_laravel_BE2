@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class userController extends Controller
 {
     public function index(){
-        return view('user/index');
+        $arrVariables = [
+            'title' => 'Home'
+        ];
+        return view('user/index',$arrVariables);
     }
     public function loginForm(){
         return view('user/login');
