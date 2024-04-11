@@ -14,8 +14,8 @@ return new class extends Migration
         //
         Schema::create('sizes_products', function (Blueprint $table) {
             $table->id();
-            $table->string('id_size')->unique();
-            $table->string('id_product');    
+            $table->integer('id_size');
+            $table->string('id_product',5);    
             $table->timestamps();
         });
     }

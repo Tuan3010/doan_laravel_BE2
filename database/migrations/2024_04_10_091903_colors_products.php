@@ -14,8 +14,8 @@ return new class extends Migration
         //
         Schema::create('colors_products', function (Blueprint $table) {
             $table->id();
-            $table->string('id_color')->unique();
-            $table->string('id_product');    
+            $table->integer('id_color');
+            $table->string('id_product',5);    
             $table->timestamps();
         });
     }

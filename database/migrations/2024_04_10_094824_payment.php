@@ -13,10 +13,8 @@ return new class extends Migration
     {
         //
         Schema::create('payment', function (Blueprint $table) {
-            //$table->id();
-            $table->string('id_payment')->unique();
-            $table->string('name_payment'); 
-            //$table->text('type');   
+            $table->id();
+            $table->string('name_payment',100); 
             $table->timestamps();
         });
     }

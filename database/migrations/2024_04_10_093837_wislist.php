@@ -14,9 +14,8 @@ return new class extends Migration
         //
         Schema::create('wislist', function (Blueprint $table) {
             $table->id();
-            $table->string('id_product');
-            $table->string('name_user'); 
-            //$table->text('type');   
+            $table->string('id_product',5);
+            $table->integer('id_user');   
             $table->timestamps();
         });
     }

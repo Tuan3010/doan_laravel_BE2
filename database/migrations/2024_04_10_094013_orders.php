@@ -14,18 +14,15 @@ return new class extends Migration
         //
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('code_order');
-            $table->string('name_buyer'); 
+            $table->string('code_order',8)->unique();
+            $table->string('name_buyer',50); 
             $table->string('phone')->digits(10);
-            $table->string('email');
+            $table->string('email',100);
             $table->string('address');
             $table->double('total');
-            $table->text('status');
-            $table->string('id_payment');
-            $table->string('id_user');
-         
-
-            //$table->text('type');   
+            $table->integer('status')->default(0);
+            $table->integer('id_payment');
+            $table->integer('id_user'); 
             $table->timestamps();
         });
         

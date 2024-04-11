@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('id_product')->unique();
-            $table->string('name_product');
-            $table->string('des_product');
+            $table->string('id_product',5)->unique();
+            $table->string('name_product',50);
+            $table->text('des_product');
+            $table->string('img_product',50);
             $table->timestamps();
         });
 
