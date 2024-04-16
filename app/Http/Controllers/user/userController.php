@@ -4,9 +4,12 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+
 
 class userController extends Controller
 {
+    // Hiển thị danh sách trang
     public function index(){
         $arrVariables = [
             'title' => 'Home'
@@ -22,14 +25,14 @@ class userController extends Controller
     public function adoreForm(){
         return view('user/adore-list');
     }
-    public function orderForm(){
-        return view('user/order');
-    }
-    public function productDetailForm(){
-        return view('user/product-detail');
+    
+    public function productDetailForm($id){
+        $productItem = Product::find($id);
+        return view('user/product-detail',compact('productItem'));
     }
     public function productListForm(){
-        return view('user/product-list');
+        $productList = Product::all();
+        return view('user/product-list',compact('productList'));
     }
     public function searchProductForm(){
         return view('user/search-product');
@@ -40,4 +43,6 @@ class userController extends Controller
     public function resultsearchOrderForm(){
         return view('user/result-search-order');
     }
+    // Xử lí thêm nút thêm vào giỏ hàng và nút thanh toán
+    
 }

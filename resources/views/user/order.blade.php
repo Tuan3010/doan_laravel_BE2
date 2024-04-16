@@ -10,28 +10,40 @@
         <div class="warp-left">
           <h3 class="order-list-title">GIỎ HÀNG</h3>
           <hr>
+          @foreach (Session::get('cart') as $item)
+              
           <div class="product-list-order">
             <div class="warp-item-form-drive"></div>
             <div class="row">
-              <div class="col l-8">
+              <div class="col l-9">
                 <div class="media">
                   <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1-500x500.jpg" alt=""></a>
+                    <a href=""><img style="width: 180px; height: 180px;" src="../img/imgProduct/{{$item['img_product']}}" alt=""></a>
                   </div>
                   <div class="media-right">
-                    <h3 class="product-name"><a href="">Vintas public 2000s - Low top</a></h3>
-                    <span><b>Giá:</b>620.000đ</span>
+                    @php
+                      $number = $item['price_product'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                    @endphp
+                    <h3 class="product-name"><a href="">{{$item ['name_product']}}</a></h3>
+                    <span><b>Giá: </b>{{$formatted_money}}</span>
                     <div class="size-quantity">
                       <span class="size-title">Size</span>
                       <span class="quantity-title">Số lượng</span>
+                      <span class="quantity-title">Màu sắc</span>
                       <form  action="#" method="get">
                         
-                        <select name="size" id="sizeSelect" size="1">
+                        <select name="size" id="sizeSelect" size="1" >
                           <option>1</option>
                           <option>2</option>              
                         </select>  
 
                         <select name="quantity" id="quantitySelect" size="1">
+                          <option >1</option>
+                          <option>2</option>                      
+                        </select>
+
+                        <select style="margin-left: 15px" name="quantity" id="quantitySelect" size="1">
                           <option >1</option>
                           <option>2</option>                      
                         </select>
@@ -42,9 +54,13 @@
                   </div>
                 </div>
               </div>
-              <div class="col l-4">
+              <div class="col l-3">
                 <div class="media2">
-                  <span class="price-product">620.000 VND</span>
+                  @php
+                      $number = $item['price_product'] * $item['quantity'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                  @endphp
+                  <span class="price-product">{{$formatted_money}} VND</span>
                   <span class="status">Còn hàng</span>
                   <div class="btn-like-add">
                     <form action="#" method="post">
@@ -59,55 +75,8 @@
               </div>
             </div>
           </div>
-          <div class="product-list-order">
-            <div class="warp-item-form-drive"></div>
-            <div class="row">
-              <div class="col l-8">
-                <div class="media">
-                  <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1-500x500.jpg" alt=""></a>
-                  </div>
-                  <div class="media-right">
-                    <h3 class="product-name"><a href="">Vintas public 2000s - Low top</a></h3>
-                    <span><b>Giá:</b>620.000đ</span>
-                    <div class="size-quantity">
-                      <span class="size-title">Size</span>
-                      <span class="quantity-title">Số lượng</span>
-                      <form  action="#" method="get">
-                        
-                        <select name="size" id="sizeSelect" size="1">
-                          <option>1</option>
-                          <option>2</option>              
-                        </select>  
 
-                        <select name="quantity" id="quantitySelect" size="1">
-                          <option >1</option>
-                          <option>2</option>                      
-                        </select>
-
-                        <input type="submit" value="Refesh">
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col l-4">
-                <div class="media2">
-                  <span class="price-product">620.000 VND</span>
-                  <span class="status">Còn hàng</span>
-                  <div class="btn-like-add">
-                    <form action="#" method="post">
-                      
-                      <button class="btn-like"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Heart.svg" alt=""></button>
-                    </form>
-                    <a class="btn-del" href="#  ">
-                      <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Trash_bin.svg" alt="">
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach         
         </div>
       </div>
       <div class="col l-4">

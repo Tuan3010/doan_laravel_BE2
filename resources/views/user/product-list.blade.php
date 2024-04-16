@@ -28,34 +28,17 @@
         <div class="col l-9">
           <div class="warp-right">
             <div class="row">
+              @foreach ($productList as $product)
+                  
               <div class="col l-4">
                 <div class="product-item">
-                  <a href=""><img width="100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00207_2-500x500.jpg" alt=""></a>
-                  <h4><a href="">Vintas Public 2000s - Low Top</a></h4>
-                  <span>250.000 VND</span>
+                  <a href="{{route('user/product-detail',$product->id)}}"><img width="100%" src="img/imgProduct/{{$product->img_product}}" alt=""></a>
+                  <h4><a href="{{route('user/product-detail',$product->id)}}">{{$product->name_product}}</a></h4>
+                  <span>{{$product->price_product}}</span>
                 </div>
               </div>
-              <div class="col l-4">
-                <div class="product-item">
-                  <a href=""><img width="100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00207_2-500x500.jpg" alt=""></a>
-                  <h4><a href="">Vintas Public 2000s - Low Top</a></h4>
-                  <span>250.000 VND</span>
-                </div>
-              </div>
-              <div class="col l-4">
-                <div class="product-item">
-                  <a href=""><img width="100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00207_2-500x500.jpg" alt=""></a>
-                  <h4><a href="">Vintas Public 2000s - Low Top</a></h4>
-                  <span>250.000 VND</span>
-                </div>
-              </div>
-              <div class="col l-4">
-                <div class="product-item">
-                  <a href=""><img width="100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00207_2-500x500.jpg" alt=""></a>
-                  <h4><a href="">Vintas Public 2000s - Low Top</a></h4>
-                  <span>250.000 VND</span>
-                </div>
-              </div>
+
+              @endforeach
             </div>
           </div>
         </div>

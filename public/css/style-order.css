@@ -59,7 +59,10 @@
 .size-quantity{
   margin-top: 20px;
 }
-.quantity-title,
+.quantity-title{
+  padding-right: 20px;
+  font-weight: 600;
+}
 .size-title{
   font-weight: 600;
   padding-right: 40px;
