@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_product',5)->unique();
             $table->string('name_product',50);
+            $table->integer('price_product');
             $table->text('des_product');
             $table->string('img_product',50);
             $table->timestamps();
