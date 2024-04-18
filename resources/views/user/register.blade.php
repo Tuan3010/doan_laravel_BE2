@@ -15,10 +15,10 @@
     </div>
     <!-- Login Form -->
     <form action="" method="post">
-      <input type="text" id="username" name="username" class="fadeIn second"  placeholder="Name">
-      <input type="password" id="password" name="password" class="fadeIn third" placeholder="Email">
-      <input type="text" id="password" name="password" class="fadeIn third" placeholder="UserName">
-      <input type="text" id="password" name="password" class="fadeIn third" placeholder="Password">
+      <input type="text" id="name" name="name" class="fadeIn second"  placeholder="Name">
+      <input type="email" id="email" name="email" class="fadeIn third" placeholder="Email">
+      <input type="text" id="username" name="username" class="fadeIn third" placeholder="UserName">
+      <input type="password" id="password" name="password" class="fadeIn third" placeholder="Password">
       <!-- Xuất Lỗi -->
       
      

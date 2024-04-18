@@ -19,6 +19,9 @@ class userController extends Controller
     public function registerForm(){
         return view('user/register');
     }
+    public function registerStore(Request $request){
+
+    }
     public function adoreForm(){
         return view('user/adore-list');
     }
