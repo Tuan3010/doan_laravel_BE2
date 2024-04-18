@@ -26,7 +26,7 @@ Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('u
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
 // Admin
-Route::get('admin/product/list',[productController::class, 'index']);
-Route::get('admin/product/create',[productController::class, 'create']);
-Route::get('admin/product/edit',[productController::class, 'edit']);
+Route::prefix('admin')->group(function(){
+  // Route::resource('payment',PaymentController::class);
+});
 
