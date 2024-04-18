@@ -36,7 +36,7 @@
           <h3 class="warp-right-name-product">{{$productItem->name_product}}</h3>
           <span class="warp-right-price">{{$productItem->price_product}} VND</span>
           <div class="line"></div>   
-          <form  action="{{route('store.cart')}}" method="post" style="margin-top: 35px;">
+          <form  action="{{route('store.cartandpay')}}" method="post" style="margin-top: 35px;">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$productItem->id}}">
             <input type="hidden" name="id_product" id="id_product" value="{{$productItem->id_product}}">
@@ -50,7 +50,7 @@
             </select>  
             <span>Số lượng</span>
             <div class="box-input" >
-              <input style=" width: 50%;padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; font-size: 16px" type="number" name="quantity" min="1" max="10" value="1">
+              <input style=" width: 50%;padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; font-size: 16px; padding-left: 22px" type="number" name="quantity" min="1" max="10" value="1">
             </div>
             <span>Size</span>
             <select name="size" id="quantitySelect" size="1">

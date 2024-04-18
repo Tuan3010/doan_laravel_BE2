@@ -26,9 +26,14 @@ Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('u
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
 // ->order
-Route::post('/order',[UserOrderController::class, 'storeCart'])->name('store.cart');
+Route::post('/cartandpay',[UserOrderController::class, 'storeCartandPay'])->name('store.cartandpay');
+Route::post('/deleteorder', [UserOrderController::class, 'deleteCart'])->name('user.deleteorder');
+Route::post('/deleteorderall', [UserOrderController::class, 'deleteCartAll'])->name('user.deleteorderall');
 Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/order');
-
+// Ghi chú: khi quay lại nhánh crudcart-tuan thì cv là 
+// 1.Hiển thị color và size và hình ảnh ở trang chi tiết sản phẩm
+// 2.Thêm sản phẩm khi mỗi người dùng đăng nhập
+// 3.Chức năng refesh
 // Admin
 Route::get('admin/product/list',[productController::class, 'index']);
 Route::get('admin/product/create',[productController::class, 'create']);

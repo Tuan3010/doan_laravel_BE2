@@ -5,12 +5,16 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
 {
     // Hiển thị danh sách trang
     public function index(){
+        if (!(Session::exists('countCart'))) {
+            Session::put('countCart',0);
+        }
         $arrVariables = [
             'title' => 'Home'
         ];
