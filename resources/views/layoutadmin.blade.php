@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>@yield('title','Tên mặc định(admin)')</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -77,7 +77,7 @@
               
             <li class="nav-header">QUẢN LÝ CHUNG</li>
             <li class="nav-item">
-              <a href="pages/calendar.html" class="nav-link">
+              <a href="{{route('list-product')}}" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
                   Quản lý sản phẩm
@@ -94,7 +94,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/gallery.html" class="nav-link">
+              <a href="{{route('listCategory')}}" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>
                   Quản lý danh mục
@@ -167,7 +167,12 @@
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
-
+      @if(session()->has('error'))
+        <div class="alert alert-danger">{{session('error')}}</div>
+        @endif
+        @if(session()->has('success'))
+        <div class="alert alert-success">{{session('success')}}</div>
+      @endif
       <!-- Content main ('viết code ở đây') -->
       @yield('contentadmin')
       <!-- End Content main  ('viết code ở trên') -->
@@ -188,6 +193,6 @@
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <script src="../dist/js/adminlte.js"></script>
-
+ 
 </body>
 </html>
