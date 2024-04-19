@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [userController::class, 'index'])->name('user/index');
 Route::get('/login', [userController::class, 'loginForm'])->name('user/login');
 Route::get('/register', [userController::class, 'registerForm'])->name('user/register');
+Route::post('/register',[userController::class, 'registerStore'])->name('register.store');
 Route::get('/adore-list', [userController::class, 'adoreForm'])->name('user/adore-list');
 Route::get('/order', [userController::class, 'orderForm'])->name('user/order');
 Route::get('/product-detail', [userController::class, 'productDetailForm'])->name('user/product-detail');
