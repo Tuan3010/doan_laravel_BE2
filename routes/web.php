@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\productController;
+use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,31 @@ Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('u
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
 // Admin
+Route::get('admin/product/list',[productController::class, 'index']);
+Route::get('admin/product/create',[productController::class, 'create']);
+Route::get('admin/product/edit',[productController::class, 'edit']);
 Route::prefix('admin')->group(function(){
   // Route::resource('payment',PaymentController::class);
 });
+//Luong-category
+//hiển thị thêm danh mục
+Route::get('/category', function() {
+    return view('admin/category/createCategory');
+})->name('createCategory');
+//hien thị danh sách danh mục
+Route::get('/listCategory', [categoryController::class, 'getAll'])->name('listCategory');
+//xoa
+Route::delete('/listCategory/{id}',  [categoryController::class, 'deleteCategory'])->name('deleteCategory');
+//them
+Route::post('admin/category/create-category', [categoryController::class, 'createCategory'])->name('post-category');
+//sua category
+Route::post('uppdate-category/{id}', [categoryController::class, 'uppdateCategory'])->name('patch-updatecategory');
+//lấy category qua trang update
+Route::get('/listCategory/{id}', [categoryController::class, 'viewUppdateCategory'])->name('uppdateCategory');
+//san phamm
+Route::get('/listProduct', function() {
+    return view('admin/product/listProduct');
+})->name('list-product');
+
+
 
