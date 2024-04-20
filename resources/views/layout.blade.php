@@ -13,7 +13,7 @@
   <div class="header">
     <div class="header-nav1">
       <ul class="header-nav1-list">
-        <li class="nav1-list__item"><a href="{{route('user/order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_gio_hang.svg" alt="">Giỏ hàng</a></li>
+        <li class="nav1-list__item"><a href="{{route('user/order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_gio_hang.svg" alt="">Giỏ hàng &#40; {{Session::get('countCart')}} &#41;</a></li>
         <li class="nav1-list__item"><a href="{{route('user/login')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Đăng nhập</a></li>
         <li class="nav1-list__item"><a href="{{route('user/adore-list')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_heart_header.svg" alt=""> Yêu thích</a></li>
         <li class="nav1-list__item"><a href="{{route('user/search-order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_tra_cuu_don_hang.svg" alt=""> Tra cứu đơn hàng</a></li>
@@ -119,6 +119,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 </body>
 </html>
