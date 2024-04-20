@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\user;
-
+use App\Models\Color;
+use App\Models\Size;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -9,10 +10,33 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     public function orderForm(){
-        return view('user/order');
+        $cartArr = Session::get('cart',[]);
+        if ((Session::has('cart'))) {
+            
+            // Tạo vòng lặp để lấy ds color
+            foreach ($cartArr as &$value) {
+                $colors = Color::join('colors_products', 'colors.id', '=', 'colors_products.id_color')
+                ->select('colors.name_color', 'colors_products.id_product')
+                ->where('colors_products.id_product',$value['id_product'])
+                ->get();
+                $value['colors'] = $colors;         
+            }
+            // Tạo vòng lặp đểlấy ds size
+            foreach ($cartArr as &$value) {
+                $sizes = Size::join('sizes_products', 'sizes.id', '=' , 'sizes_products.id_size')
+                        ->select('sizes_products.id_product' , 'sizes.name_size')
+                        ->where('sizes_products.id_product',$value['id_product'])
+                        ->orderBy('sizes.name_size', 'asc')
+                        ->get();
+                $value['sizes'] = $sizes;
+            }        
+        }
+        // print_r($cartArr);
+        return view('user/order',compact('cartArr'));
     }
 
     public function storeCartandPay(Request $request){
+        
         // Hàm dd() trong laravel không tự động cập dữ liệu khi f5 nên sử dụng print_r() để xem dữ liệu
         // Session::forget('cart');
         if($request->exists('addCart')){
@@ -20,7 +44,7 @@ class OrderController extends Controller
                 Session::put('cart', );
                 Session::push('cart',$request->all());   
                 Session::put('countCart', 1);
-                return redirect()->route('user/product-detail',$request->id);
+                return redirect()->route('user/product-detail',$request->id_product);
             }else{          
                 $i = 0;
                 $fg = 0;          
@@ -46,11 +70,8 @@ class OrderController extends Controller
                     $count += $request->get('quantity');
                     Session::put('countCart', $count);
                 }    
-
-                print_r($array);
-                echo $count;
                 
-                return redirect()->route('user/product-detail',$request->id);            
+                return redirect()->route('user/product-detail',$request->id_product);            
             }  
         }else if($request->exists('pay')){
             if(!(Session::exists('cart'))) {
@@ -91,7 +112,20 @@ class OrderController extends Controller
             }  
         }   
     }
+    public function updateCart(Request $request){
+        $arrCart = Session::get('cart',[]);
+        $i = 0 ;
+        foreach ($arrCart as $value) {
+            if ($value['id_product'] === $request->get('id_product')) {
+                $arrCart[$i]['quantity'] = $request->get('quantity');
+                $arrCart[$i]['size'] = $request->get('size');
+                $arrCart[$i]['color'] = $request->get('color');
+                Session::put('cart',$arrCart);
+            }
+        }
+        return redirect()->route('user/order');
 
+    }
     public function deleteCart(Request $request){ 
         
         //Gọi phần tử  

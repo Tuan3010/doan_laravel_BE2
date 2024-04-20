@@ -32,8 +32,8 @@
                   
               <div class="col l-4">
                 <div class="product-item">
-                  <a href="{{route('user/product-detail',$product->id)}}"><img width="100%" src="img/imgProduct/{{$product->img_product}}" alt=""></a>
-                  <h4><a href="{{route('user/product-detail',$product->id)}}">{{$product->name_product}}</a></h4>
+                  <a href="{{route('user/product-detail',$product->id_product)}}"><img width="100%" src="img/imgProduct/{{$product->img_product}}" alt=""></a>
+                  <h4><a href="{{route('user/product-detail',$product->id_product)}}">{{$product->name_product}}</a></h4>
                   <span>{{$product->price_product}}</span>
                 </div>
               </div>

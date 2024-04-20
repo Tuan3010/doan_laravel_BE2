@@ -10,8 +10,7 @@
         <div class="warp-left">
           <h3 class="order-list-title">GIỎ HÀNG</h3>
           <hr>
-          @if (Session::get('cart') != null)
-          @php $cartArr = Session::get('cart');   @endphp
+          @if (Session::exists('cart'))
           @for ($i = 0; $i < count($cartArr); $i++)
           <div class="product-list-order">
             <div class="warp-item-form-drive"></div>
@@ -32,20 +31,28 @@
                       <span class="size-title">Size</span>
                       <span class="quantity-title">Số lượng</span>
                       <span class="quantity-title">Màu sắc</span>
-                      <form  action="#" method="get">
-                        
-                        <select name="size" id="sizeSelect" size="1" >
-                          <option>1</option>
-                          <option>2</option>              
+                      <form  action="{{route('user.updatecart')}}" method="post" style="display: flex">
+                        @csrf
+                        <input type="hidden" name="id_product" value="{{$cartArr[$i]['id_product']}}">
+                        <select name="size" id="sizeSelect" size="1" style="margin-right: 10px">
+                          @foreach ($cartArr[$i]['sizes'] as $size)
+                              <option {{($cartArr[$i]['size'] == $size->name_size) ? 'selected' : ''}}
+                              value="{{$size->name_size}}">{{$size->name_size}}
+                              </option>
+                          @endforeach       
                         </select>  
 
                         <div class="box-input" >
-                          <input style=" width: 100%;padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; font-size: 16px" type="number" name="quantity" min="1" max="10" value="1">
+                          <input style=" width: 100%;padding: 10px; border: 1px solid #ccc; font-size: 15px" 
+                          type="number" name="quantity" min="1" max="10" value="{{$cartArr[$i]['quantity']}}">
                         </div>
 
-                        <select style="margin-left: 15px" name="quantity" id="quantitySelect" size="1">
-                          <option >1</option>
-                          <option>2</option>                      
+                        <select style="margin-left: 10px" name="color" id="quantitySelect" size="1">
+                          @foreach ($cartArr[$i]['colors'] as $color)
+                              <option {{($cartArr[$i]['color'] == $color->name_color) ? 'selected' : ''}}
+                              value="{{$color->name_color}}">{{$color->name_color}}
+                              </option>
+                          @endforeach                       
                         </select>
 
                         <input class="btn-refesh" type="submit" value="Refesh">
@@ -79,7 +86,6 @@
               </div>
             </div>
           </div>
-
           @endfor              
           @endif
          <br> 

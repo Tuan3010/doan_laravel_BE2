@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -29,11 +31,25 @@ class userController extends Controller
     public function adoreForm(){
         return view('user/adore-list');
     }
-    
-    public function productDetailForm($id){
-        $productItem = Product::find($id);
-        return view('user/product-detail',compact('productItem'));
+    // Xử lí chi tiết sản phẩm
+    public function productDetailForm($id_product){
+        // Dùng hàm get() khi lấy danh sách , first() lấy 1 đối tượng 
+        // Lấy 1 sản phẩm
+        $productItem = Product::where('id_product',$id_product)->first();
+        // Lấy danh sách màu của sản phẩm có id_pro = $id_product
+        $colors = Color::join('colors_products', 'colors.id', '=', 'colors_products.id_color')
+                            ->select('colors.name_color', 'colors_products.id_product')
+                            ->where('colors_products.id_product',$id_product)
+                            ->get();
+        //Lấy danh sách size của sản phẩm đó size_pro = $size_pro 
+        $sizes = Size::join('sizes_products', 'sizes.id', '=' , 'sizes_products.id_size')
+                        ->select('sizes_products.id_product' , 'sizes.name_size')
+                        ->where('sizes_products.id_product',$id_product)
+                        ->orderBy('sizes.name_size', 'asc')
+                        ->get();
+        return view('user/product-detail',compact('productItem','colors','sizes'));
     }
+
     public function productListForm(){
         $productList = Product::all();
         return view('user/product-list',compact('productList'));

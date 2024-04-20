@@ -45,8 +45,9 @@
             <input type="hidden" name="img_product" id="img_product" value="{{$productItem->img_product}}">
             <span>Màu sắc</span>
             <select name="color" id="sizeSelect" size="1">
-              <option>Xanh</option>
-              <option>Đỏ</option>              
+              @foreach ($colors as $color)                 
+              <option value="{{$color->name_color}}">{{$color->name_color}}</option>             
+              @endforeach
             </select>  
             <span>Số lượng</span>
             <div class="box-input" >
@@ -54,8 +55,9 @@
             </div>
             <span>Size</span>
             <select name="size" id="quantitySelect" size="1">
-              <option >1</option>
-              <option>2</option>                      
+              @foreach ($sizes as $size)                 
+              <option value="{{$size->name_size}}">{{$size->name_size}}</option>             
+              @endforeach                     
             </select>
             <input class="btn-add-cart" type="submit" name="addCart" value="Thêm Vào Giỏ Hàng">
             <input class="btn-submit" type="submit" name="pay"  value="Thanh Toán">
