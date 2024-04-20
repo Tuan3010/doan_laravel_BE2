@@ -27,7 +27,7 @@ Route::get('/product-list', [userController::class, 'productListForm'])->name('u
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
-// ->order
+// ->order-tuấn
 Route::post('/cartandpay',[UserOrderController::class, 'storeCartandPay'])->name('store.cartandpay');
 Route::post('/deleteorder', [UserOrderController::class, 'deleteCart'])->name('user.deleteorder');
 Route::post('/deleteorderall', [UserOrderController::class, 'deleteCartAll'])->name('user.deleteorderall');
@@ -41,7 +41,7 @@ Route::get('admin/product/edit',[productController::class, 'edit']);
 Route::prefix('admin')->group(function(){
   // Route::resource('payment',PaymentController::class);
 });
-//Luong-category
+//Lượng-category
 //hiển thị thêm danh mục
 Route::get('/category', function() {
     return view('admin/category/createCategory');
