@@ -1,13 +1,13 @@
 @extends('layoutadmin')
-@section('title','Thêm màu')
+@section('title','Thêm size')
 @section('contentadmin')
 
 <!-- Content main ('viết code ở đây') -->
-<form action="{{ route('post-color') }}" method="post">
+<form action="{{ route('post-size') }}" method="post">
   @csrf
   <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Thêm Màu</h3>
+      <h3 class="card-title">Thêm Size</h3>
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
           <i class="fas fa-minus"></i>
@@ -16,10 +16,10 @@
     </div>
     <div class="card-body" style="display: block;">
       <div class="form-group">
-        <label for="inputName">Tên màu</label>
-        <input name="name_color" type="text" id="name_color" class="form-control">
-        @if ($errors->has('name_color'))
-        <span class="text-danger">{{ $errors->first('name_color') }}</span>
+        <label for="inputName">Tên size</label>
+        <input name="name_size" type="text" id="name_size" class="form-control">
+        @if ($errors->has('name_size'))
+        <span class="text-danger">{{ $errors->first('name_size') }}</span>
         @endif
       </div>
       <!-- <div class="form-group">

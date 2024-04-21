@@ -39,7 +39,7 @@ class productController extends Controller
         //dd(1123);
         $validates = $request->validate([
             'id_category' => 'required',
-            'id_product' => 'required|numeric',
+            'id_product' => 'required|numeric|unique:products',
             'name_product' => 'required',
             'price_product' => 'required|numeric',
             'des_product' => 'required',
@@ -85,7 +85,7 @@ class productController extends Controller
             'name_img' => $ten_file,
             'id_product' => $validates['id_product'],
         ]);
-        return redirect(route('create-product'))->withSuccess('Thêm thành công!');
+        return redirect(route('list-product'))->withSuccess('Thêm thành công!');
 
     }
     public function deleteProduct($id_product){
@@ -154,4 +154,5 @@ class productController extends Controller
         ]);
         return redirect(route('list-product'))->withSuccess("Cập nhật thành công!");
     }
+ 
 }
