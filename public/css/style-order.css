@@ -47,7 +47,8 @@
   background-color: black;
   padding: 10px 60px;
   display: inline-block;
-  
+  border: none;
+  cursor: pointer;
 }
 .btn-like{
   cursor: pointer;
@@ -59,15 +60,19 @@
 .size-quantity{
   margin-top: 20px;
 }
-.quantity-title,
+.quantity-title{
+  padding-right: 22px;
+  font-weight: 600;
+}
 .size-title{
   font-weight: 600;
-  padding-right: 40px;
+  padding-right: 50px;
 }
 .size-quantity form{
   margin-top: 12px;
 }
-.size-quantity input{
+.size-quantity .btn-refesh{
+  margin-left: 10px;
   cursor: pointer;
   color: #fff;
   border: none;
@@ -124,4 +129,31 @@
   font-weight: 600;
   float: right;
   color: var(--primary-color);
+}
+.box-input{
+  display: inline-block;
+}
+.btndel-btnreturn{ 
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.btndel-btnreturn .btn-bottom {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  background: #000;
+  font-size: 20px;
+  padding: 8px 50px;
+}
+.btndel-btnreturn::before{
+  top: -20px;
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: #000;
 }

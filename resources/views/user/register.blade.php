@@ -14,12 +14,37 @@
       <h3>Sign Up</h3>
     </div>
     <!-- Login Form -->
-    <form action="" method="post">
-      <input type="text" id="username" name="username" class="fadeIn second"  placeholder="Name">
-      <input type="password" id="password" name="password" class="fadeIn third" placeholder="Email">
-      <input type="text" id="password" name="password" class="fadeIn third" placeholder="UserName">
+    <form action="{{route('register.store')}}" method="post">
+      @csrf
+      @if(session()->has('error'))
+          <div class="alert alert-danger">{{session('error')}}</div>
+      @endif
+      @if(session()->has('success'))
+          <div class="alert alert-success">{{session('success')}}</div>
+      @endif
+      <input type="text" id="name" name="name" class="fadeIn second"  placeholder="Name">
+      <!-- Xuất Lỗi -->
+      @if ($errors->has('name'))
+        <div class="text-danger">{{ $errors->first('name') }}</div>
+      @endif
+
+      <input type="text" id="email" name="email" class="fadeIn third" placeholder="Email">
+      <!-- Xuất Lỗi -->
+      @if ($errors->has('email'))
+        <div class="text-danger">{{ $errors->first('email') }}</div>
+      @endif
+
+      <input type="text" id="username" name="username" class="fadeIn third" placeholder="UserName">
+      <!-- Xuất Lỗi -->
+      @if ($errors->has('username'))
+        <div class="text-danger">{{ $errors->first('username') }}</div>
+      @endif
+
       <input type="text" id="password" name="password" class="fadeIn third" placeholder="Password">
       <!-- Xuất Lỗi -->
+      @if ($errors->has('password'))
+        <div class="text-danger">{{ $errors->first('password') }}</div>
+      @endif
       
      
       <input type="submit" name="submit" class="fadeIn fourth" value="Sign Up">     
