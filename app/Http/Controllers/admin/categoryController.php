@@ -40,7 +40,7 @@ class categoryController extends Controller
     public function deleteCategory($id){
         //dd('123');
         Categories::destroy($id);
-        return redirect(route('listCategory'));
+        return redirect(route('listCategory'))->withSuccess("Xóa thành công!");
     }
     public function viewUppdateCategory($id){
         $category = Categories::find($id);

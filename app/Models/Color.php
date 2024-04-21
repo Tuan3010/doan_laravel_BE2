@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
     // Kết nối với bảng 
     protected $table = 'colors';
     // Các trường đầu vào
     protected $fillable = [
+        'id',
         'name_color',      
-    ];
+    ]; 
 }

@@ -12,6 +12,7 @@ class Image extends Model
     protected $table = 'images';
     // Các trường đầu vào
     protected $fillable = [
+        'id',
         'name_img',
         'id_product',       
     ];
