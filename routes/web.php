@@ -38,7 +38,7 @@ Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/orde
 
 // Admin
 Route::prefix('admin')->group(function(){
-  // Route::resource('payment',PaymentController::class);
+  //Route::resource('payment',PaymentController::class);
 });
 //Lượng-category
 //hiển thị thêm danh mục
@@ -83,4 +83,9 @@ Route::post('/createSize',[sizeController::class, 'createSize'])->name('post-siz
 
 Route::get('/editSize/{id}',[sizeController::class, 'viewUpdateSize'])->name('view-edit-size');
 Route::post('uppdate-size/{id}', [sizeController::class, 'updateSize'])->name('update-size');
+
+//-----------------------------login_Lượng-----------------------
+Route::post('login', [userController::class, 'authUser'])->name('check-login');//phan quyen dang nhap chưa phân quyền user và admin
+//-----------------------------logout_Lượng-----------------------
+Route::get('logout', [userController::class, 'logout'])->name('logout');
 
