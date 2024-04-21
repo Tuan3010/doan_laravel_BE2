@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Auth;
 class userController extends Controller
 {
     // Hiển thị danh sách trang
@@ -24,6 +24,7 @@ class userController extends Controller
         return view('user/index',$arrVariables);
     }
     public function loginForm(){
+        //dd(Auth::check());
         return view('user/login');
     }
     public function registerForm(){
@@ -33,15 +34,15 @@ class userController extends Controller
         // Kiểm tra đầu vào
         $requestValidated = $request->validate([
             'name' => 'required|max:50',
-            'email' => 'required|max:100|email',
-            'username' => 'required|max:50',
+            'email' => 'required|max:100|email|unique:users',
+            'user_name' => 'required|max:50|unique:users',
             'password' => 'required|max:50|min:3'            
         ]);       
         // Lưu vào data
         User::create([
             'name' =>$requestValidated['name'],
             'email' =>$requestValidated['email'],
-            'user_name' =>$requestValidated['username'],
+            'user_name' =>$requestValidated['user_name'],
             'password' => $requestValidated['password'],
             // 'password' => Hash::make($requestValidated['password']),
             'role' => 1
@@ -84,5 +85,35 @@ class userController extends Controller
         return view('user/result-search-order');
     }
     // Xử lí thêm nút thêm vào giỏ hàng và nút thanh toán
+    public function checkLogin(){
+
+    }
+    public function authUser(Request $request)
+    {
+
+
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        //lay email va password
+        $credentials = $request->only('email', 'password');
+        //dd(Auth::check($credentials));
+        //kiem tra duoi database
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended(route('user/index'))
+                ->withSuccess('Đăng nhập thành công!!');
+        }
+        //{{ '$request'}};
+        return redirect(route('user/login'))->withError('Email hoặc mật khẩu không đúng');
+    }
+    //log out
+    public function logOut()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect(route('user/index'));
+    }
+
     
 }

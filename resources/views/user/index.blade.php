@@ -1,5 +1,6 @@
 
  @extends('layout')
+ @section('title', 'Trang chủ | Home Page')
  @section('content')
   <link rel="stylesheet" href="css/style-index.css"> 
   

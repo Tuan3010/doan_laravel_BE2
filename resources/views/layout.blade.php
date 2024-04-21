@@ -7,16 +7,22 @@
   <title>@yield('title','Tên mặc định')</title>
   <link rel="stylesheet" href="../../css/style-grid.css">
   <link rel="stylesheet" href="../../css/style-layout.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body>
   <!-- Header -->
   <div class="header">
     <div class="header-nav1">
       <ul class="header-nav1-list">
+        @auth
+        <li class="nav1-list__item"><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
         <li class="nav1-list__item"><a href="{{route('user/order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_gio_hang.svg" alt="">Giỏ hàng &#40; {{Session::get('countCart')}} &#41;</a></li>
-        <li class="nav1-list__item"><a href="{{route('user/login')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Đăng nhập</a></li>
         <li class="nav1-list__item"><a href="{{route('user/adore-list')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_heart_header.svg" alt=""> Yêu thích</a></li>
         <li class="nav1-list__item"><a href="{{route('user/search-order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_tra_cuu_don_hang.svg" alt=""> Tra cứu đơn hàng</a></li>
+        <li class="nav1-list__item"><a href="{{route('listCategory')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Amdin</a></li>
+        @else
+        <li class="nav1-list__item"><a href="{{route('user/login')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Đăng nhập</a></li>
+        @endauth
       </ul>
     </div>
     <div class="header-nav2">
@@ -53,6 +59,12 @@
       </div>
     </div>
   </div>
+  @if(session()->has('error'))
+        <div class="alert alert-danger">{{session('error')}}</div>
+        @endif
+        @if(session()->has('success'))
+        <div class="alert alert-success">{{session('success')}}</div>
+  @endif
   {{-- Content --}}
   @yield('content')
   {{-- EndContent --}}
