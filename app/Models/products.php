@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Products extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id_product';
     // Kết nối với bảng 
-    protected $table = 'categories';
+    protected $table = 'products';
     // Các trường đầu vào
     protected $fillable = [
-        'name_category',
-        'type',       
+        'id_product',
+        'name_product',       
+        'price_product',       
+        'des_product',       
+        'img_product',       
     ];
 }

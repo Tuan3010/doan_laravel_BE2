@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\admin\categoryController;
+use App\Http\Controllers\admin\colorController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\OrderController as UserOrderController;
@@ -35,9 +36,6 @@ Route::post('/updatecart', [UserOrderController::class, 'updateCart'])->name('us
 Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/order');
 
 // Admin
-Route::get('admin/product/list',[productController::class, 'index']);
-Route::get('admin/product/create',[productController::class, 'create']);
-Route::get('admin/product/edit',[productController::class, 'edit']);
 Route::prefix('admin')->group(function(){
   // Route::resource('payment',PaymentController::class);
 });
@@ -57,9 +55,22 @@ Route::post('uppdate-category/{id}', [categoryController::class, 'uppdateCategor
 //lấy category qua trang update
 Route::get('/listCategory/{id}', [categoryController::class, 'viewUppdateCategory'])->name('uppdateCategory');
 //san phamm
-Route::get('/listProduct', function() {
-    return view('admin/product/listProduct');
-})->name('list-product');
+Route::get('/listProduct',[productController::class, 'getAll'])->name('list-product');
+//thêm sản phảm
+Route::get('/createProduct',[productController::class, 'getAllCategory'])->name('create-product');//lấy danh mục
+Route::post('/createProduct',[productController::class, 'createProduct'])->name('post-create-product');//thêm sản phẩm...
+Route::delete('/listProduct/{id_product}',[productController::class, 'deleteProduct'])->name('delete-product');
+//lấy sản phẩm qua trang update
+Route::get('/listProduct/{id_product}', [productController::class, 'viewUpdateProduct'])->name('uppdateProduct');
+Route::post('uppdate-product/{id}', [productController::class, 'updateProduct'])->name('update-product');
 
-
+//list color
+Route::get('/listColor',[colorController::class, 'getAll'])->name('list-color');//lấymàu
+route::get('/createColor', function(){
+  return view('admin/color/createColor');
+})->name('create-color');
+Route::post('/createColor',[colorController::class, 'createColor'])->name('post-color');//lấymàu
+Route::delete('/listColor/{id_color}',[colorController::class, 'deleteColor'])->name('delete-color');
+Route::get('/editColor/{id}',[colorController::class, 'viewUpdateColor'])->name('view-edit-color');//lấymàu
+Route::post('uppdate-color/{id}', [colorController::class, 'updateColor'])->name('update-color');
 
