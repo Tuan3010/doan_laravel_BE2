@@ -36,8 +36,7 @@
         <span class="text-danger">{{ $errors->first('price_product') }}</span>
         @endif
       </div>
-
-      <div class="">
+      <div class="form-group">
         <div class="row">
           <div class="col">
             <div class="p-3 border rounded bg-light">
@@ -79,6 +78,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="form-group">
+        
         <div class="form-group" style="margin-top: 10px">
           <label for="inputDescription">Mô tả</label>
           <textarea id="inputDescription" class="form-control" rows="4" id="des_product" name="des_product"></textarea>

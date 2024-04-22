@@ -142,8 +142,13 @@ class productController extends Controller
     public function viewUpdateProduct($id_product){
         $product = Product::find($id_product);
         $categories = Categories::all();
+        $colors = Color::all();
+        $sizes = Size::all();
         //$arrayData = ['product', 'category'];
-        $data = array('product'=>$product, 'categories'=>$categories);
+        $data = array('product'=> $product,
+                     'categories'=> $categories,
+                     'colors' => $colors,
+                     'sizes'=> $sizes);
 
         //dd($product->des_product);
         return view('admin/product/editProduct')->with('data',$data);
@@ -160,7 +165,41 @@ class productController extends Controller
         $img_path = public_path('uploads/') . $product->img_product;
         if(File::exists($img_path)){
             File::delete($img_path);
-            }
+        }
+        $sizeproduct = new Sizes_Products();
+        $sizeproduct->where('id_product',$id)->delete();
+        
+        $colorproduct = new Colors_Products();
+        $colorproduct->where('id_product',$id)->delete();
+
+        $categoriesproduct = new Categories_Products();
+        $categoriesproduct->where('id_product',$id)->delete();
+
+        $categories_products = new Categories_Products();
+        foreach($request['id_category'] as $id_category){
+            //dd($category);
+            $categories_products::create([
+                'id_category' => $id_category,
+                'id_product' => $request['id_product']
+            ]);
+        }
+        //thêm vào bảng size_product
+        // $sizes_products = new Sizes_Products();
+        // foreach($request['id_size'] as $id_size){
+        //     //dd($id_size);
+        //     $sizes_products::create([
+        //         'id_size' => $id_size,
+        //         'id_product' => $request['id_product']
+        //     ]);
+        // }
+        // //thêm vào bảng products
+        // $colors_products = new Colors_Products();
+        // foreach($request['id_color'] as $id_color){
+        //     $colors_products::create([
+        //         'id_color' => $id_color,
+        //         'id_product' => $request['id_product']
+        //     ]);
+        // }
         if ($request->has('file_upload')) {
             $file = $request->file_upload;
             // $ten_file = $file->getClientoriginalName();

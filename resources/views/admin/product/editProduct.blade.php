@@ -29,16 +29,47 @@
         @endif
       </div>
       <div class="form-group">
-        <label for="inputStatus">Danh mục</label>
-        <select class="form-control custom-select" id="id_category" name="id_category">
-        @foreach($data['categories'] as $category)
-          @if($data['product']->id_category == $category->id_category)
-          <option selected value="{{$category->id}}">{{$category->name_category}}</option>
-          @else
-          <option value="{{$category->id}}">{{$category->name_category}}</option>
-          @endif
-        @endforeach
-        </select>
+        <div class="row">
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Danh Mục</h5>
+              <php $demcategory=0; ?>
+                @foreach($data['categories'] as $category)
+                <input type="checkbox" name="id_category[]" value="{{$category->id}}" id="id_category[]">
+                <label style="font-weight:400" for="">{{$category->name_category}}</label><br>
+                @endforeach
+                @if ($errors->has('id_category'))
+                <span class="text-danger">{{ $errors->first('id_category') }}</span>
+                @endif
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Màu sắc</h5>
+              <php $demcolor=0 ?>
+                @foreach($data['colors'] as $color)
+                <input type="checkbox" name="id_color[]" value="{{$color->id}}" id="id_color[]">
+                <label style="font-weight:400" for="">{{$color->name_color}}</label><br>
+                @endforeach
+                @if ($errors->has('id_color'))
+                <span class="text-danger">{{ $errors->first('id_color') }}</span>
+                @endif
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Size</h5>
+              <php $demsize=0 ?>
+                @foreach($data['sizes'] as $size)
+                  <input type="checkbox" name="id_size[]" value="{{$size->id}}" id="id_size[]">
+                  <label style="font-weight:400" for="">{{$size->name_size}}</label><br>
+                @endforeach
+                @if ($errors->has('id_size'))
+                  <span class="text-danger">{{$errors->first('id_size')}}</span>
+                @endif
+            </div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="inputDescription">Mô tả</label>
