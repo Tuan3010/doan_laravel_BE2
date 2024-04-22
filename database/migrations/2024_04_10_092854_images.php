@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('name_img',50)->unique();
-            $table->string('id_product',100);
+            $table->string('id_product',5);
             $table->timestamps();
         });
     }

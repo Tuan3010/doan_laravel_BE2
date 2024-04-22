@@ -25,7 +25,7 @@
             <table class="table table-striped projects">
                 <thead>
                     <tr>
-                        <th style="width: 20%">
+                        <th style="width: 15%">
                             Mã sản phẩm
                         </th>
                         <th style="width: 20%">
@@ -34,10 +34,10 @@
                         <th style="width: 10%">
                             Giá
                         </th>
-                        <th>
+                        <th style="width: 20%">
                             Thông tin sản phẩm
                         </th>
-                        <th style="width: 15%" class="text-center">
+                        <th style="width: 15%" >
                             Ảnh
                         </th>
                         <!-- <th style="width: 20%">
@@ -60,7 +60,7 @@
                             {{$product->des_product}}
                         </td>
                         <td >
-                            <img src="../../../../public/uploads/{{$product->img_product}}">
+                            <img style="width: 15%;" src="../uploads/{{$product->img_product}}">
                         </td>
                         <td class="project-actions text-right">
                             <a class="btn btn-info btn-sm" href="{{url('listProduct/' . $product->id_product)}}">
@@ -68,7 +68,7 @@
                                 </i>
                                 Sửa
                             </a>
-                            <form class="btn btn-danger btn-sm" action="{{route('delete-product', $product->id_product)}}" method="post">
+                            <form class="" action="{{route('delete-product', $product->id_product)}}" method="post" style="display: inline-block;">
                                 @csrf
                                 @method("DELETE")
                                 <button class="btn btn-danger btn-sm" onclick=" return confirm('Confirm delete?')"><i class="fas fa-trash">

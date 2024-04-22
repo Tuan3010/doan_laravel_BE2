@@ -9,7 +9,7 @@
       <div class="col l-7">
         <div class="warp-img-product">
           <div class="img-main">
-            <img style="width: 100%;" src="../img/imgProduct/{{$productItem->img_product}}" alt="">
+            <img style="width: 100%;" src="../uploads/{{$productItem->img_product}}" alt="">
           </div>
           <div class="img-product-list">
             <div class="row">

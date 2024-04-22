@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Products;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Categories_Products;
@@ -20,7 +20,7 @@ class productController extends Controller
     }
     public function getAll()
     {   
-            $products = Products::all();
+            $products = Product::all();
            // return View::make('admin/category/listCategory')->with('categories', $categories);
            //dd($products[0]->id_product);
             return view('admin/product/listProduct')->with('products', $products);
@@ -71,7 +71,7 @@ class productController extends Controller
             'id_category' => $validates['id_category'],
             'id_product' => $validates['id_product']
         ]);
-        $products = new Products();
+        $products = new Product();
         $products::create([
             'id_product' => $validates['id_product'],
             'name_product' => $validates['name_product'],
@@ -90,15 +90,15 @@ class productController extends Controller
     }
     public function deleteProduct($id_product){
         //--xóa
-        $product = Products::find($id_product);
+        $product = Product::find($id_product);
         $img = Image::where('name_img', $product->img_product)->first();
         //dd($img);
         $img->delete();
-        Products::destroy($id_product);
+        Product::destroy($id_product);
         return redirect(route('list-product'))->withSuccess("Xóa thành công!");
     }
     public function viewUpdateProduct($id_product){
-        $product = Products::find($id_product);
+        $product = Product::find($id_product);
         $categories = Categories::all();
         //$arrayData = ['product', 'category'];
         $data = array('product'=>$product, 'categories'=>$categories);
@@ -114,7 +114,7 @@ class productController extends Controller
             'file_upload' => 'required|image',     
         ]);
         
-        $product = Products::find($id);
+        $product = Product::find($id);
         $img_path = public_path('uploads/') . $product->img_product;
         if(File::exists($img_path)){
             File::delete($img_path);
