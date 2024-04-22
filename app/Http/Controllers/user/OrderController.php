@@ -5,6 +5,7 @@ use App\Models\Color;
 use App\Models\Size;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,23 +13,20 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     public function __construct() {
-        // Buổi tối check
-        // 1.Khởi động lại thì sẽ mất auth:check();
-        // 2.Kêu lượng push đăng nhập 
-        // 3.Chỉnh lại tổng giá bên Tổng cộng
-        // 4.Làm thanh toán đơn hàng
+        //
+        // 
     }
 
     public function orderForm(){
         
         $cartArr = Session::get('cart',[]);
-        $cartUser = [];
+        // $cartUser = [];
         // print_r($cartArr);
         //attempt(['user_name' => 'tuan', 'password' => '111'])
         if (Auth::check()) {
             Session::forget('cart');
             $id_user = Auth::user()['id'];
-            $cartUser = Cart::where('id_user',10)->get();
+            $cartUser = Cart::where('id_user',$id_user)->get();
             // Lấy sl sản phẩm trong giỏ hàng @auth
             $countCart = Cart::where('id_user',$id_user)->sum('quantity');
             Session::put('countCart',$countCart);
@@ -72,7 +70,8 @@ class OrderController extends Controller
                 }        
             }
         }
-        return view('user/order',compact('cartArr','cartUser'));
+        $totalMoney = 0;
+        return view('user/order',compact('cartArr','cartUser', 'totalMoney'));
     }
 
     public function storeCartandPay(Request $request){
@@ -290,5 +289,53 @@ class OrderController extends Controller
             return redirect()->route('user/order');
         }
         
+    }
+    public function payment(Request $request){
+        //Kiểm tra validated
+        $requestValidated = $request->validate([
+            'name_buyer' => 'required',
+            'phone' => 'required|numeric',
+            'email' => 'required|email',
+            'address' => 'required'
+        ]);
+        $codebill = 'TLS'.rand(0,99999);
+        if (Auth::check()) {
+            $id_user = Auth::user()['id'];
+            // print_r($requestValidated);
+            Order::create([
+                'code_order' => $codebill,
+                'name_buyer' => $requestValidated['name_buyer'],               
+                'phone' => $requestValidated['phone'],               
+                'email' => $requestValidated['email'],               
+                'address' => $requestValidated['address'],               
+                'total' => $request['total'],               
+                'id_payment' => $request['payment'],               
+                'id_user' => $id_user,                              
+            ]);
+            Cart::where('id_user',$id_user)->delete();
+            Session::put('countCart',0);
+            Session::put('code_cart',$codebill);
+            return redirect()->route('user/info-order');
+        }else{
+            $carts = Session::get('cart',[]);
+            if ($carts->count() > 0) {
+                Order::create([
+                    'code_order' => $codebill,
+                    'name_buyer' => $requestValidated['name_buyer'],               
+                    'phone' => $requestValidated['phone'],               
+                    'email' => $requestValidated['email'],               
+                    'address' => $requestValidated['address'],               
+                    'total' => $request['total'],               
+                    'id_payment' => $request['payment'],               
+                    'id_user' => 0,                              
+                ]);
+                Session::forget('cart');
+                Session::put('code_cart',$codebill);
+                return redirect()->route('user/info-order');
+            }else{
+                return redirect()->route('user/order');
+            }
+            
+        }
     }
 }
