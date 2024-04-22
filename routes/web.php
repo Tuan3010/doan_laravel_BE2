@@ -3,8 +3,10 @@
 use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\colorController;
+use App\Http\Controllers\admin\sizeController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\user\OrderController as UserOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,17 +24,23 @@ Route::get('/login', [userController::class, 'loginForm'])->name('user/login');
 Route::get('/register', [userController::class, 'registerForm'])->name('user/register');
 Route::post('/register',[userController::class, 'registerStore'])->name('register.store');
 Route::get('/adore-list', [userController::class, 'adoreForm'])->name('user/adore-list');
-Route::get('/order', [userController::class, 'orderForm'])->name('user/order');
-Route::get('/product-detail', [userController::class, 'productDetailForm'])->name('user/product-detail');
+Route::get('/product-detail/{id_product}', [userController::class, 'productDetailForm'])->name('user/product-detail');
 Route::get('/product-list', [userController::class, 'productListForm'])->name('user/product-list');
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
+// ->order-tuấn
+Route::post('/cartandpay',[UserOrderController::class, 'storeCartandPay'])->name('store.cartandpay');
+Route::post('/deleteorder', [UserOrderController::class, 'deleteCart'])->name('user.deleteorder');
+Route::post('/deleteorderall', [UserOrderController::class, 'deleteCartAll'])->name('user.deleteorderall');
+Route::post('/updatecart', [UserOrderController::class, 'updateCart'])->name('user.updatecart');
+Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/order');
+
 // Admin
 Route::prefix('admin')->group(function(){
-  // Route::resource('payment',PaymentController::class);
+  //Route::resource('payment',PaymentController::class);
 });
-//Luong-category
+//Lượng-category
 //hiển thị thêm danh mục
 Route::get('/category', function() {
     return view('admin/category/createCategory');
@@ -62,8 +70,22 @@ Route::get('/listColor',[colorController::class, 'getAll'])->name('list-color');
 route::get('/createColor', function(){
   return view('admin/color/createColor');
 })->name('create-color');
-Route::post('/createColor',[colorController::class, 'createColor'])->name('post-color');//lấymàu
+Route::post('/createColor',[colorController::class, 'createColor'])->name('post-color');
 Route::delete('/listColor/{id_color}',[colorController::class, 'deleteColor'])->name('delete-color');
 Route::get('/editColor/{id}',[colorController::class, 'viewUpdateColor'])->name('view-edit-color');//lấymàu
 Route::post('uppdate-color/{id}', [colorController::class, 'updateColor'])->name('update-color');
+Route::get('/listSize', [sizeController::class, 'getAll'])->name('list-size');
+Route::delete('/listSize/{id}',[sizeController::class, 'deleteSize'])->name('delete-size');
+Route::get('/createSize', function(){
+  return view('admin/size/createSize');
+})->name('create-size');
+Route::post('/createSize',[sizeController::class, 'createSize'])->name('post-size');
+
+Route::get('/editSize/{id}',[sizeController::class, 'viewUpdateSize'])->name('view-edit-size');
+Route::post('uppdate-size/{id}', [sizeController::class, 'updateSize'])->name('update-size');
+
+//-----------------------------login_Lượng-----------------------
+Route::post('login', [userController::class, 'authUser'])->name('check-login');//phan quyen dang nhap chưa phân quyền user và admin
+//-----------------------------logout_Lượng-----------------------
+Route::get('logout', [userController::class, 'logout'])->name('logout');
 

@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('categories_products', function (Blueprint $table) {
             $table->id();
-            $table->string('id_product',100);
+            $table->string('id_product',5);
             $table->integer('id_category');    
             $table->timestamps();
         });

@@ -10,104 +10,177 @@
         <div class="warp-left">
           <h3 class="order-list-title">GIỎ HÀNG</h3>
           <hr>
+          {{-- Hiển thị giỏ hàng session --}}
+          @if (Session::exists('cart'))
+          @for ($i = 0; $i < count($cartArr); $i++)
           <div class="product-list-order">
             <div class="warp-item-form-drive"></div>
             <div class="row">
-              <div class="col l-8">
+              <div class="col l-9">
                 <div class="media">
                   <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1-500x500.jpg" alt=""></a>
+                    <a href=""><img style="width: 180px; height: 180px;" src="../img/imgProduct/{{$cartArr[$i]['img_product']}}" alt=""></a>
                   </div>
                   <div class="media-right">
-                    <h3 class="product-name"><a href="">Vintas public 2000s - Low top</a></h3>
-                    <span><b>Giá:</b>620.000đ</span>
+                    @php
+                      $number = $cartArr[$i]['price_product'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                    @endphp
+                    <h3 class="product-name"><a href="">{{$cartArr[$i]['name_product']}}</a></h3>
+                    <span><b>Giá: </b>{{$formatted_money}}</span>
                     <div class="size-quantity">
                       <span class="size-title">Size</span>
                       <span class="quantity-title">Số lượng</span>
-                      <form  action="#" method="get">
-                        
-                        <select name="size" id="sizeSelect" size="1">
-                          <option>1</option>
-                          <option>2</option>              
+                      <span class="quantity-title">Màu sắc</span>
+                      <form  action="{{route('user.updatecart')}}" method="post" style="display: flex">
+                        @csrf
+                        <input type="hidden" name="id_product" value="{{$cartArr[$i]['id_product']}}">
+                        <select name="size" id="sizeSelect" size="1" style="margin-right: 10px">
+                          @foreach ($cartArr[$i]['sizes'] as $size)
+                              <option {{($cartArr[$i]['size'] == $size->name_size) ? 'selected' : ''}}
+                              value="{{$size->name_size}}">{{$size->name_size}}
+                              </option>
+                          @endforeach       
                         </select>  
 
-                        <select name="quantity" id="quantitySelect" size="1">
-                          <option >1</option>
-                          <option>2</option>                      
+                        <div class="box-input" >
+                          <input style=" width: 100%;padding: 10px; border: 1px solid #ccc; font-size: 15px" 
+                          type="number" name="quantity" min="1" max="10" value="{{$cartArr[$i]['quantity']}}">
+                        </div>
+
+                        <select style="margin-left: 10px" name="color" id="quantitySelect" size="1">
+                          @foreach ($cartArr[$i]['colors'] as $color)
+                              <option {{($cartArr[$i]['color'] == $color->name_color) ? 'selected' : ''}}
+                              value="{{$color->name_color}}">{{$color->name_color}}
+                              </option>
+                          @endforeach                       
                         </select>
 
-                        <input type="submit" value="Refesh">
+                        <input class="btn-refesh" type="submit" value="Refesh">
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col l-4">
+              <div class="col l-3">
                 <div class="media2">
-                  <span class="price-product">620.000 VND</span>
+                  @php
+                      $number = $cartArr[$i]['price_product'] * $cartArr[$i]['quantity'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                  @endphp
+                  <span class="price-product">{{$formatted_money}} VND</span>
                   <span class="status">Còn hàng</span>
                   <div class="btn-like-add">
-                    <form action="#" method="post">
-                      
+                    <form action="#" method="post">                     
                       <button class="btn-like"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Heart.svg" alt=""></button>
                     </form>
-                    <a class="btn-del" href="#  ">
-                      <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Trash_bin.svg" alt="">
-                    </a>
+                    <form action="{{route('user.deleteorder')}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id" value="{{$i}}">
+                      <button class="btn-del" >
+                        <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Trash_bin.svg" alt="">
+                      </button>
+                    </form>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          @endfor              
+          @endif
+          {{-- Hiển thị giỏ hàng user --}}
+          @auth
+          @foreach ($cartUser as $item)
+              
           <div class="product-list-order">
             <div class="warp-item-form-drive"></div>
             <div class="row">
-              <div class="col l-8">
+              <div class="col l-9">
                 <div class="media">
                   <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1-500x500.jpg" alt=""></a>
+                    <a href=""><img style="width: 180px; height: 180px;" src="../img/imgProduct/{{$item['img_product']}}" alt=""></a>
                   </div>
                   <div class="media-right">
-                    <h3 class="product-name"><a href="">Vintas public 2000s - Low top</a></h3>
-                    <span><b>Giá:</b>620.000đ</span>
+                    @php
+                      $number = $item['price'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                    @endphp
+                    <h3 class="product-name"><a href="">{{$item['name_product']}}</a></h3>
+                    <span><b>Giá: </b>{{$formatted_money}}</span>
                     <div class="size-quantity">
                       <span class="size-title">Size</span>
                       <span class="quantity-title">Số lượng</span>
-                      <form  action="#" method="get">
-                        
-                        <select name="size" id="sizeSelect" size="1">
-                          <option>1</option>
-                          <option>2</option>              
+                      <span class="quantity-title">Màu sắc</span>
+                      <form  action="{{route('user.updatecart')}}" method="post" style="display: flex">
+                        @csrf
+                        <input type="hidden" name="id_product" value="{{$item['id_product']}}">
+                        <select name="size" id="sizeSelect" size="1" style="margin-right: 10px">
+                          @foreach ($item['sizes'] as $size)
+                              <option {{($item['size'] == $size->name_size) ? 'selected' : ''}}
+                              value="{{$size->name_size}}">{{$size->name_size}}
+                              </option>
+                          @endforeach       
                         </select>  
 
-                        <select name="quantity" id="quantitySelect" size="1">
-                          <option >1</option>
-                          <option>2</option>                      
+                        <div class="box-input" >
+                          <input style=" width: 100%;padding: 10px; border: 1px solid #ccc; font-size: 15px" 
+                          type="number" name="quantity" min="1" max="10" value="{{$item['quantity']}}">
+                        </div>
+
+                        <select style="margin-left: 10px" name="color" id="quantitySelect" size="1">
+                          @foreach ($item['colors'] as $color)
+                              <option {{($item['color'] == $color->name_color) ? 'selected' : ''}}
+                              value="{{$color->name_color}}">{{$color->name_color}}
+                              </option>
+                          @endforeach                       
                         </select>
 
-                        <input type="submit" value="Refesh">
+                        <input class="btn-refesh" type="submit" value="Refesh">
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col l-4">
+              <div class="col l-3">
                 <div class="media2">
-                  <span class="price-product">620.000 VND</span>
+                  @php
+                      $number = $item['price'] * $item['quantity'];
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                  @endphp
+                  <span class="price-product">{{$formatted_money}} VND</span>
                   <span class="status">Còn hàng</span>
                   <div class="btn-like-add">
-                    <form action="#" method="post">
-                      
+                    <form action="#" method="post">                     
                       <button class="btn-like"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Heart.svg" alt=""></button>
                     </form>
-                    <a class="btn-del" href="#  ">
-                      <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Trash_bin.svg" alt="">
-                    </a>
+                    <form action="{{route('user.deleteorder')}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id_product" value="{{$item['id_product']}}">
+                      <input type="hidden" name="color" value="{{$item['color']}}">
+                      <input type="hidden" name="size" value="{{$item['size']}}">
+                      <input type="hidden" name="quantity" value="{{$item['quantity']}}">
+                      <button class="btn-del" >
+                        <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Trash_bin.svg" alt="">
+                      </button>
+                    </form>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          @endforeach
+          @endauth
+         <br> 
+         <div class="btndel-btnreturn">
+          <form action="{{route('user.deleteorderall')}}" method="post">
+            @csrf
+            <button class="btn-bottom" href="">Xóa Hết</button>
+          </form>
+          <a class="btn-bottom" href="{{route('user/product-list')}}">Quay Lại Mua Hàng</a>
+          </div>       
         </div>
       </div>
       <div class="col l-4">

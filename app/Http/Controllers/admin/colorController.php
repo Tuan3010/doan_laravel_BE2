@@ -21,7 +21,7 @@ class colorController extends Controller
         $colors::create([
             'name_color' => $request['name_color'],
         ]);
-        return redirect(route('create-color'))->withSuccess('Thêm thành công!');
+        return redirect(route('list-color'))->withSuccess('Thêm thành công!');
     }
     public function deleteColor($id_color){
         Color::destroy($id_color);

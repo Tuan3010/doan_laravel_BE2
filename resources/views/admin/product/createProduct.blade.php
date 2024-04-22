@@ -36,15 +36,39 @@
         <span class="text-danger">{{ $errors->first('price_product') }}</span>
         @endif
       </div>
-      <div class="form-group">
-        <label for="inputStatus">Danh mục</label>
-        <select class="form-control custom-select" id="id_category" name="id_category">
-          @foreach($categories as $category)
-          <option value="{{$category->id}}">{{$category->name_category}}</option>
-          @endforeach
-        </select>
+ 
+      <div class="">
+        <div class="row">
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Danh Mục</h5>
+              <input type="checkbox" name="categories[]" value="?" id="1">
+              <label style="font-weight:400"  for="1">Tên danh mục</label><br>
+              <input type="checkbox" name="categories[]" value="?" id="1">
+              <label style="font-weight:400"  for="1">Tên danh mục</label><br>
+                            
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Màu sắc</h5>
+              <input type="checkbox" name="colors[]" value="?" id="1">
+              <label style="font-weight:400" for="1">Tên màu sắc</label><br>
+              <input type="checkbox" name="colors[]" value="?" id="2">
+              <label style="font-weight:400" for="2">Tên màu sắc</label><br>
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 border rounded bg-light">
+              <h5 style="font-weight:bold">Size</h5>
+              <input type="checkbox" name="sizes[]" value="?" id="1">
+              <label style="font-weight:400" for="1">Tên màu sắc</label><br>
+              <input type="checkbox" name="sizes[]" value="?" id="2">
+              <label style="font-weight:400" for="2">Tên màu sắc</label><br>
+            </div>
+          </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" style="margin-top: 10px ">
         <label for="inputDescription">Mô tả</label>
         <textarea id="inputDescription" class="form-control" rows="4"  id="des_product" name="des_product"></textarea>
         @if ($errors->has('des_product'))

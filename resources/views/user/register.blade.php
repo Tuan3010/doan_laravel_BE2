@@ -5,7 +5,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="css/style-login.css">
 <!------ Include the above in your HEAD tag ---------->
-
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <a href="{{ route('user/index') }}" style="text-decoration: none;">Home Page</a>
@@ -34,7 +33,7 @@
         <div class="text-danger">{{ $errors->first('email') }}</div>
       @endif
 
-      <input type="text" id="username" name="username" class="fadeIn third" placeholder="UserName">
+      <input type="text" id="user_name" name="user_name" class="fadeIn third" placeholder="UserName">
       <!-- Xuất Lỗi -->
       @if ($errors->has('username'))
         <div class="text-danger">{{ $errors->first('username') }}</div>

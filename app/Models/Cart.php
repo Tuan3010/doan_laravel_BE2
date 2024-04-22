@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
-    // Kết nối với bảng 
-    protected $table = 'carts';
-    // Các trường đầu vào
+    // Kết nối với bảng
+    protected $table = "carts";
+    // Các trường dữ liệu được nhập
     protected $fillable = [
         'id_product',
         'name_product',
@@ -20,6 +20,6 @@ class Cart extends Model
         'size',
         'total_amount',
         'img_product',
-        'id_user'
+        'id_user',
     ];
 }
