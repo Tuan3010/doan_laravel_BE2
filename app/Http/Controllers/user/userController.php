@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,11 @@ class userController extends Controller
 {
     // Hiển thị danh sách trang
     public function index(){
-        if (!(Session::exists('countCart'))) {
+        if (Auth::check()) {
+            $id_user = Auth::user()['id'];
+            $cartUser = Cart::where('id_user',$id_user)->sum('quantity');
+            Session::put('countCart',$cartUser);
+        }else if(!(Session::has('countCart'))){
             Session::put('countCart',0);
         }
         $arrVariables = [
