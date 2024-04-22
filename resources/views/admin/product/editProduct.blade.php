@@ -35,8 +35,12 @@
               <h5 style="font-weight:bold">Danh Mục</h5>
               <php $demcategory=0; ?>
                 @foreach($data['categories'] as $category)
-                <input type="checkbox" name="id_category[]" value="{{$category->id}}" id="id_category[]">
-                <label style="font-weight:400" for="">{{$category->name_category}}</label><br>
+                
+                    <input type="checkbox" name="id_category[]" value="{{$category->id}}" id="id_category[]">
+                    <label style="font-weight:400" for="">{{$category->name_category}}</label><br>
+                
+                    
+                
                 @endforeach
                 @if ($errors->has('id_category'))
                 <span class="text-danger">{{ $errors->first('id_category') }}</span>

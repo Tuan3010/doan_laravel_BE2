@@ -137,6 +137,15 @@ class productController extends Controller
         //dd($img);
         $img->delete();
         Product::destroy($id_product);
+        $sizeproduct = new Sizes_Products();
+        $sizeproduct->where('id_product',$id_product)->delete();
+        
+        $colorproduct = new Colors_Products();
+        $colorproduct->where('id_product',$id_product)->delete();
+
+        $categoriesproduct = new Categories_Products();
+        $categoriesproduct->where('id_product',$id_product)->delete();
+
         return redirect(route('list-product'))->withSuccess("Xóa thành công!");
     }
     public function viewUpdateProduct($id_product){
@@ -144,6 +153,10 @@ class productController extends Controller
         $categories = Categories::all();
         $colors = Color::all();
         $sizes = Size::all();
+        $categories_products = new Categories_Products();
+        $categors_productsChecked = $categories_products->where('id_product', $id_product);
+        dd($categors_productsChecked);
+       
         //$arrayData = ['product', 'category'];
         $data = array('product'=> $product,
                      'categories'=> $categories,
