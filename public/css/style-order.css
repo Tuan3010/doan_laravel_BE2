@@ -10,6 +10,9 @@
   margin: 40px 0;
   
 }
+.text-danger{
+  color: var(--primary-color);
+}
 .media{
   display: flex;
 }
