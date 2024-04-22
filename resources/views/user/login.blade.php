@@ -19,7 +19,7 @@
     <!-- Login Form -->
     <form action="{{route('check-login')}}" method="post">
       @csrf
-      <input type="text" id="email" name="email" class="fadeIn second" placeholder="login">
+      <input type="text" id="user_name" name="user_name" class="fadeIn second" placeholder="login">
       @if ($errors->has('user_name'))
       <span class="text-danger">{{ $errors->first('user_name') }}</span>
       @endif

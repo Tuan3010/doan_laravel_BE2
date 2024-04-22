@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Sizes_Products extends Model
 {
     use HasFactory;
-    // Kết nối với bảng 
-    protected $table = 'categories';
+    protected $table = 'sizes_products';
     // Các trường đầu vào
     protected $fillable = [
-        'id',
-        'name_category',
-        'type',
+       'id',
+       'id_size',
+       'id_product',
     ];
 }
