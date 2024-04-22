@@ -58,7 +58,7 @@ Route::get('/listCategory/{id}', [categoryController::class, 'viewUppdateCategor
 //san phamm
 Route::get('/listProduct',[productController::class, 'getAll'])->name('list-product');
 //thêm sản phảm
-Route::get('/createProduct',[productController::class, 'getAllCategory'])->name('create-product');//lấy danh mục
+Route::get('/createProduct',[productController::class, 'getAllData'])->name('create-product');//lấy danh mục, color, size...
 Route::post('/createProduct',[productController::class, 'createProduct'])->name('post-create-product');//thêm sản phẩm...
 Route::delete('/listProduct/{id_product}',[productController::class, 'deleteProduct'])->name('delete-product');
 //lấy sản phẩm qua trang update

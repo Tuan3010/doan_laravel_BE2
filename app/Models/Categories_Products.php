@@ -12,7 +12,8 @@ class Categories_Products extends Model
      protected $table = 'categories_products';
      // Các trường đầu vào
      protected $fillable = [
-         'id_product',
-         'id_category',
+        'id',
+        'id_product',
+        'id_category',
      ];
 }

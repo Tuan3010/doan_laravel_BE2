@@ -18,8 +18,9 @@ class userController extends Controller
     public function index(){
         if (Auth::check()) {
             $id_user = Auth::user()['id'];
-            $cartUser = Cart::where('id_user',$id_user)->sum('quantity');
-            Session::put('countCart',$cartUser);
+            //CHỖ NÀY BUG LƯỢNG CMT
+            //$cartUser = Cart::where('id_user',$id_user)->sum('quantity');
+            //Session::put('countCart',$cartUser);
         }else if(!(Session::has('countCart'))){
             Session::put('countCart',0);
         }
@@ -98,11 +99,11 @@ class userController extends Controller
 
 
         $request->validate([
-            'email' => 'required',
+            'user_name' => 'required',
             'password' => 'required',
         ]);
         //lay email va password
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('user_name', 'password');
         //dd(Auth::check($credentials));
         //kiem tra duoi database
         if (Auth::attempt($credentials)) {

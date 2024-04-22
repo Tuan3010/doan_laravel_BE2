@@ -7,8 +7,14 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Categories_Products;
+use App\Models\Color;
+use App\Models\Colors_Products;
 use App\Models\Image;
-use Illuminate\Support\Facades\File; 
+use App\Models\Size;
+use App\Models\Sizes_Products;
+use Illuminate\Support\Facades\File;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
+
 class productController extends Controller
 {
     /**
@@ -27,24 +33,62 @@ class productController extends Controller
             
         //return redirect("login")->withSuccess('You are not allowed to access');
     }
-    public function getAllCategory()
+    public function getAllData()
     {   
             $categories = Categories::all();
+            $sizes = Size::all();
+            $colors = Color::all();
+            $data = array('categories'=>$categories, 'sizes'=>$sizes, 'colors'=>$colors);
            // return View::make('admin/category/listCategory')->with('categories', $categories);
-            return view('admin/product/createProduct')->with('categories', $categories);
+           //dd($data['categories']);
+            return view('admin/product/createProduct')->with('data', $data);
             
         //return redirect("login")->withSuccess('You are not allowed to access');
     }
     public function createProduct(Request $request){
         //dd(1123);
+      
         $validates = $request->validate([
             'id_category' => 'required',
             'id_product' => 'required|numeric|unique:products',
             'name_product' => 'required',
             'price_product' => 'required|numeric',
             'des_product' => 'required',
-            'file_upload' => 'required|image',     
+            'file_upload' => 'required|image',   
+            'id_category' => 'required',
+            'id_color' => 'required',
+            'id_size' => 'required'
+
         ]);
+        //thêm vào bảng category_product
+        $categories_products = new Categories_Products();
+        foreach($request['id_category'] as $id_category){
+            //dd($category);
+            $categories_products::create([
+                'id_category' => $id_category,
+                'id_product' => $validates['id_product']
+            ]);
+        }
+        //thêm vào bảng size_product
+        $sizes_products = new Sizes_Products();
+        foreach($request['id_size'] as $id_size){
+            //dd($id_size);
+            $sizes_products::create([
+                'id_size' => $id_size,
+                'id_product' => $validates['id_product']
+            ]);
+        }
+        //thêm vào bảng products
+        $colors_products = new Colors_Products();
+        foreach($request['id_color'] as $id_color){
+            $colors_products::create([
+                'id_color' => $id_color,
+                'id_product' => $validates['id_product']
+            ]);
+        }
+        
+        //thêm vào bảng color
+        //dd($request['id_category']);
         //doi ten file nguoi dung
         if ($request->has('file_upload')) {
             $file = $request->file_upload;
@@ -60,17 +104,15 @@ class productController extends Controller
             //truong cua ten file sau khi ep kieu la image
             //dd($img_product);
         }
+        
+
         //$categories = new Categories();
         // Products::create([
         //     'name_category' => $validates['name_category'],
         //     'type' => $validates['type'],
         // ]
         // );
-        $categories_products = new Categories_Products();
-        $categories_products::create([
-            'id_category' => $validates['id_category'],
-            'id_product' => $validates['id_product']
-        ]);
+      
         $products = new Product();
         $products::create([
             'id_product' => $validates['id_product'],
