@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\colorController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\sizeController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
@@ -42,7 +43,7 @@ Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.pay
 // Admin
 Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
-  
+    Route::resource('order',OrderController::class);
 });
 //Lượng-category
 //hiển thị thêm danh mục

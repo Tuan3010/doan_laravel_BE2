@@ -5,6 +5,7 @@ use App\Models\Color;
 use App\Models\Size;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Details_Orders;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -298,9 +299,23 @@ class OrderController extends Controller
             'email' => 'required|email',
             'address' => 'required'
         ]);
-        $codebill = 'TLS'.rand(0,99999);
+        $codebill = 'TLS'.rand(0,9999999);
         if (Auth::check()) {
+            
             $id_user = Auth::user()['id'];
+            $carts = Cart::where('id_user',$id_user)->get();
+            // Lấy danh sách giỏ hàng của ng dùng $id_user để lưu vào chi tiết order
+            foreach ($carts as $item) {
+                Details_Orders::create([
+                    'code_order' => $codebill,
+                    'id_product' => $item['id_product'],
+                    'size' => $item['size'],
+                    'color' => $item['color'],
+                    'quantity' => $item['quantity'],
+                    'price_one_product' => $item['price'],
+                    'total_price' => $item['total_amount'],
+                ]);
+            }
             // print_r($requestValidated);
             Order::create([
                 'code_order' => $codebill,
@@ -312,13 +327,25 @@ class OrderController extends Controller
                 'id_payment' => $request['payment'],               
                 'id_user' => $id_user,                              
             ]);
-            Cart::where('id_user',$id_user)->delete();
+
+            $carts->where('id_user',$id_user)->delete();
             Session::put('countCart',0);
             Session::put('code_cart',$codebill);
             return redirect()->route('user/info-order');
         }else{
             $carts = Session::get('cart',[]);
             if ($carts->count() > 0) {
+                foreach ($carts as $item) {
+                    Details_Orders::create([
+                        'code_order' => $codebill,
+                        'id_product' => $item['id_product'],
+                        'size' => $item['size'],
+                        'color' => $item['color'],
+                        'quantity' => $item['quantity'],
+                        'price_one_product' => $item['price'],
+                        'total_price' => $item['total_amount'],
+                    ]);
+                }
                 Order::create([
                     'code_order' => $codebill,
                     'name_buyer' => $requestValidated['name_buyer'],               
