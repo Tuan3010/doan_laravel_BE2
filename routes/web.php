@@ -44,6 +44,7 @@ Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.pay
 Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
     Route::resource('order',OrderController::class);
+    Route::post('order/comfirm',[OrderController::class, 'confirmOrder'])->name('order.confirm');
 });
 //Lượng-category
 //hiển thị thêm danh mục

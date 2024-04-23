@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Details_Orders;
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,6 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
+        // 1.Làm xác nhận đơn hàng
+        // 2.Xóa đơn hàng
+        // 3.danh sách ngừi dùng
         $orders = Order::all();
         return view('admin/order/listOrder',compact('orders'));
     }
@@ -36,9 +41,19 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request,string $id)
     {
-        //
+        // Lấy thông tin người dùng 
+        $infoUser = $request->all();
+        // Truy vấn phương thức thanh toán
+        $namePayment = Payment::find($request['id_payment']);
+        //danh sách chi tiết và Truy vấn tên sản phẩm
+        $detailsOrders = Details_Orders::select('detail_orders.*','products.name_product')
+                                        ->join('products', 'detail_orders.id_product', '=' , 'products.id_product')
+                                        ->where('code_order',$id)
+                                        ->get();
+        // print_r($nameProducts);
+        return view('admin/order/viewOrder',compact('namePayment','infoUser','detailsOrders'));
     }
 
     /**
@@ -60,8 +75,17 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
-        //
+        $code_order = $request->get('code_order');
+        // Xóa giỏ hàng
+        Order::destroy($id);
+        // Xóa chi tiết giỏ hàng
+        Details_Orders::where('code_order',$code_order)->delete();
+        return redirect()->route('order.index');
+    }
+    public function confirmOrder(Request $request){
+        Order::where('code_order',$request->get('code_order'))->update(['status' => 1]);
+        return redirect()->route('order.index');
     }
 }

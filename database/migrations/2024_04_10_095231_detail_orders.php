@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('id_product',5); 
             $table->string('size',20);
             $table->string('color',20);
-            $table->integer('quantily');
+            $table->integer('quantity');
             $table->double('price_one_product');
             $table->double('total_price');
  

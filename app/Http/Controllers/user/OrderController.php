@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     public function __construct() {
-        //
-        // 
+        //1.xưe lí view chi tiết đơn hàng 
+        // 22.thay đổi trạng thái 0 1
     }
 
     public function orderForm(){
@@ -299,7 +299,7 @@ class OrderController extends Controller
             'email' => 'required|email',
             'address' => 'required'
         ]);
-        $codebill = 'TLS'.rand(0,9999999);
+        $codebill = 'TLS'.rand(0,99999);
         if (Auth::check()) {
             
             $id_user = Auth::user()['id'];
@@ -328,7 +328,7 @@ class OrderController extends Controller
                 'id_user' => $id_user,                              
             ]);
 
-            $carts->where('id_user',$id_user)->delete();
+            Cart::where('id_user',$id_user)->delete();
             Session::put('countCart',0);
             Session::put('code_cart',$codebill);
             return redirect()->route('user/info-order');
@@ -343,7 +343,7 @@ class OrderController extends Controller
                         'color' => $item['color'],
                         'quantity' => $item['quantity'],
                         'price_one_product' => $item['price'],
-                        'total_price' => $item['total_amount'],
+                        'total_price' => $item['price'] * $item['quantity'],
                     ]);
                 }
                 Order::create([

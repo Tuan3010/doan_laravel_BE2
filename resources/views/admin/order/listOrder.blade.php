@@ -23,13 +23,13 @@
                         <th style="width: 1%">
                             ID
                         </th>
-                        <th style="width: 10%">
+                        <th style="width: 8%">
                             CODE_BILL
                         </th>
-                        <th style="width: 13%">
+                        <th style="width: 10%">
                             NAME
                         </th>
-                        <th style="width: 10%">
+                        <th style="width: 8%">
                             PHONE
                         </th>                                         
                         <th style="width: 15%">
@@ -38,12 +38,8 @@
                         <th style="width: 20%">
                             ADDRESS
                         </th>                                         
-                        <th style="width: 10%">
-                            <a style="padding: 7px 26px; float:right" class="btn btn-primary btn-sm" href="">
-                                <i class="fas fa-folder">
-                                </i>
-                                Add
-                            </a>
+                        <th style="width: 13%" class="text-center">
+                            ACTION
                         </th>
                     </tr>
                 </thead>
@@ -97,21 +93,44 @@
                         </td>                       
                         
                         <td class="project-actions text-right">
-                                      
-                            <a class="btn btn-info btn-sm" href="">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
-                            </a>
-                            <form style="display: inline-block;" action="" method="post">
-                                @method('DELETE')
+                            <form  action="{{route('order.show',$item->code_order)}}" method="get" style="display: inline-block;">
                                 @csrf
-                                <button class="btn btn-danger btn-sm" >
-                                    <i class="fas fa-trash">
+                                <input type="hidden" name="code_order" value="{{$item->code_order}}">
+                                <input type="hidden" name="name_buyer" value="{{$item->name_buyer}}">
+                                <input type="hidden" name="address" value="{{$item->address}}">
+                                <input type="hidden" name="phone" value="{{$item->phone}}">
+                                <input type="hidden" name="email" value="{{$item->email}}">
+                                <input type="hidden" name="id_payment" value="{{$item->id_payment}}">
+                                <input type="hidden" name="date" value="{{$item->created_at}}">
+                                <button class="btn btn-info btn-sm ">
+                                    <i class="fas fa-pencil-alt">
                                     </i>
-                                    Delete
+                                    View
                                 </button>
                             </form>
+                            @if ($item->status == "0")
+                                <form style="display: inline-block;" action="{{route('order.confirm')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="code_order" value="{{$item->code_order}}">
+                                    <button class="btn btn-warning btn-sm" >                                                                               
+                                            unconfimred
+                                    </button>
+                                </form>
+                            @else
+                                <a href="" class="btn btn-success btn-sm text-white">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    confirmed</a>
+                            @endif 
+                            <form action="{{route('order.destroy',$item->id)}}" method="post" onclick=" return confirm('Confirm delete?')" style="display: inline-block;">
+                                @method('DELETE')
+                                @csrf
+                                <input type="hidden" name="code_order" value="{{$item->code_order}}">
+                                <button class="btn btn-danger btn-sm" > 
+                                        <i class='fas fa-trash-alt'></i>                                                                              
+                                        delete
+                                </button>
+                            </form>    
+                            
                             
                         </td>
                     </tr>
