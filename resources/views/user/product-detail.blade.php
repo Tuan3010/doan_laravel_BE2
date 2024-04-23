@@ -34,7 +34,10 @@
       <div class="col l-5">
         <div class="warp-right">
           <h3 class="warp-right-name-product">{{$productItem->name_product}}</h3>
-          <span class="warp-right-price">{{$productItem->price_product}} VND</span>
+          @php                   
+            $price_product = number_format($productItem->price_product, 0, ',', '.');
+          @endphp
+          <span class="warp-right-price">{{$price_product}} VND</span>
           <div class="line"></div>   
           <form  action="{{route('store.cartandpay')}}" method="post" style="margin-top: 35px;">
             @csrf
