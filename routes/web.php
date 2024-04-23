@@ -42,6 +42,7 @@ Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.pay
 // Admin
 Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
+  
 });
 //Lượng-category
 //hiển thị thêm danh mục
