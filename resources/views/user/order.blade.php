@@ -10,6 +10,7 @@
         <div class="warp-left">
           <h3 class="order-list-title">GIỎ HÀNG</h3>
           <hr>
+
           {{-- Hiển thị giỏ hàng session --}}
           @if (Session::exists('cart'))
           @for ($i = 0; $i < count($cartArr); $i++)
@@ -24,7 +25,8 @@
                   <div class="media-right">
                     @php
                       $number = $cartArr[$i]['price_product'];
-                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000
+                      $totalMoney += $number;                     
                     @endphp
                     <h3 class="product-name"><a href="">{{$cartArr[$i]['name_product']}}</a></h3>
                     <span><b>Giá: </b>{{$formatted_money}}</span>
@@ -99,7 +101,7 @@
               <div class="col l-9">
                 <div class="media">
                   <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="../img/imgProduct/{{$item['img_product']}}" alt=""></a>
+                    <a href=""><img style="width: 180px; height: 180px;" src="../uploads/{{$item['img_product']}}" alt=""></a>
                   </div>
                   <div class="media-right">
                     @php
@@ -146,7 +148,9 @@
                 <div class="media2">
                   @php
                       $number = $item['price'] * $item['quantity'];
-                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000                     
+                      $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000
+                      $totalMoney += $number; 
+                   
                   @endphp
                   <span class="price-product">{{$formatted_money}} VND</span>
                   <span class="status">Còn hàng</span>
@@ -188,30 +192,51 @@
           <div class="warp-order">
             <h3>ĐƠN HÀNG</h3>
             <hr>
-            <form action="#" method="post">
+            <form action="{{route('store.payment')}}" method="post">
+              @csrf
               <div class="warp-item-form">                 
-                <input type="text" id="name" name="name" placeholder="HỌ TÊN">
+                <input type="text" id="name" name="name_buyer" placeholder="HỌ TÊN">
+                <!-- Xuất Lỗi -->
+                @if ($errors->has('name_buyer'))
+                <div class="text-danger">{{ $errors->first('name_buyer') }}</div>
+                @endif
               </div>
               <div class="warp-item-form">                 
-                <input type="text" id="name" name="name" placeholder="Số điện thoại">
+                <input type="text" id="phone" name="phone" placeholder="Số điện thoại">
+                <!-- Xuất Lỗi -->
+                @if ($errors->has('phone'))
+                <div class="text-danger">{{ $errors->first('phone') }}</div>
+                @endif
               </div>
               <div class="warp-item-form">                 
-                <input type="text" id="name" name="name" placeholder="Email">
+                <input type="text" id="email" name="email" placeholder="Email">
+                <!-- Xuất Lỗi -->
+                @if ($errors->has('email'))
+                <div class="text-danger">{{ $errors->first('email') }}</div>
+                @endif
               </div>
               <div class="warp-item-form">                 
-                <input type="text" id="name" name="name" placeholder="Địa chỉ">
+                <input type="text" id="address" name="address" placeholder="Địa chỉ">
+                <!-- Xuất Lỗi -->
+                @if ($errors->has('address'))
+                <div class="text-danger">{{ $errors->first('address') }}</div>
+                @endif
               </div>
               <div class="warp-item-form">                 
-                <select name="" id="">
-                  <option value="">Thanh toán Trực Tiếp Khi Giao Hàng</option>
+                <select name="payment" id="payment">
+                  <option value="1">Thanh toán Trực Tiếp Khi Giao Hàng</option>
                 </select>
               </div>
               <div class="warp-item-form-drive"></div>
               
-              <div class="warp-item-form">                 
+              <div class="warp-item-form">
+                @php                   
+                    $formatted_totalmoney = number_format($totalMoney, 0, ',', '.');
+                @endphp                 
                 <span>Tổng Cộng:</span>
-                <span class="total-order">2.923.000 VND</span>
+                <span class="total-order">{{$formatted_totalmoney}} VND</span>
               </div>
+              <input type="hidden" id="total" name="total" value="{{$totalMoney}}">
               <div class="warp-item-form">                 
                 <input class="btn-submit" type="submit"  value="Thanh toán">
               </div>

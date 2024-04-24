@@ -90,6 +90,10 @@ class userController extends Controller
     public function resultsearchOrderForm(){
         return view('user/result-search-order');
     }
+    public function infoOrderForm(){
+        $codebill = Session::get('code_cart');
+        return view('user/info-ordered',compact('codebill'));
+    }
     // Xử lí thêm nút thêm vào giỏ hàng và nút thanh toán
     public function checkLogin(){
 

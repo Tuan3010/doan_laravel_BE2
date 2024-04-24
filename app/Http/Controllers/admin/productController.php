@@ -137,14 +137,42 @@ class productController extends Controller
         //dd($img);
         $img->delete();
         Product::destroy($id_product);
+        $sizeproduct = new Sizes_Products();
+        $sizeproduct->where('id_product',$id_product)->delete();
+        
+        $colorproduct = new Colors_Products();
+        $colorproduct->where('id_product',$id_product)->delete();
+
+        $categoriesproduct = new Categories_Products();
+        //dd($categories_products);
+        $categoriesproduct->where('id_product',$id_product)->delete();
+      
         return redirect(route('list-product'))->withSuccess("Xóa thành công!");
     }
     public function viewUpdateProduct($id_product){
         $product = Product::find($id_product);
         $categories = Categories::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        $categories_products = new Categories_Products();
+        $categors_productsChecked = $categories_products->where('id_product', $id_product)->get()
+        ->pluck('id_category')->toArray();
+        $sizes_product = new Sizes_Products();
+        $size_productChecked = $sizes_product->where('id_product', $id_product)->get() ->pluck('id_size')->toArray();;
+        $colors_products = new Colors_Products();
+        $color_productChecked = $colors_products->where('id_product', $id_product)->get() ->pluck('id_color')->toArray();;
+        //dd( $color_productChecked);
+        // dd($categors_productsChecked->);
+        //dd($categoriesproduct);
         //$arrayData = ['product', 'category'];
-        $data = array('product'=>$product, 'categories'=>$categories);
-
+        $data = array('product'=> $product,
+                     'categories'=> $categories,
+                     'colors' => $colors,
+                     'sizes'=> $sizes, 
+                     'categors_productsChecked' => $categors_productsChecked,
+                     'size_productChecked' => $size_productChecked,
+                     'color_productChecked' => $color_productChecked);
+        //dd($data['categors_productsChecked']);
         //dd($product->des_product);
         return view('admin/product/editProduct')->with('data',$data);
     }
@@ -153,14 +181,63 @@ class productController extends Controller
             'name_product' => 'required',
             'price_product' => 'required|numeric',
             'des_product' => 'required',
-            'file_upload' => 'required|image',     
+            'file_upload' => 'required|image',    
+            'id_category' => 'required',
+            'id_color' => 'required',
+            'id_size' => 'required'  
         ]);
-        
+        //xóa ảnh uploads
         $product = Product::find($id);
         $img_path = public_path('uploads/') . $product->img_product;
         if(File::exists($img_path)){
             File::delete($img_path);
-            }
+        }
+        //xóa ảnh dữ liệu quan hệ Sizes_Products để cập nhật
+        $sizeproduct = new Sizes_Products();
+        $sizeproduct->where('id_product',$id)->delete();
+        foreach($request['id_size'] as $id_size){
+            $sizeproduct::create([
+                'id_size' => $id_size,
+                'id_product' => $id
+            ]);
+        }
+        //xóa ảnh dữ liệu quan hệ Colors_Products để cập nhật
+        $colorproduct = new Colors_Products();
+        $colorproduct->where('id_product',$id)->delete();
+        foreach($request['id_color'] as $id_color){
+            $colorproduct::create([
+                'id_color' => $id_color,
+                'id_product' => $id
+            ]);
+        }
+       //xóa ảnh dữ liệu quan hệ Categories_Products để cập nhật
+        $categoriesproduct = new Categories_Products();
+        $categoriesproduct->where('id_product',$id)->delete();        
+        $categories_products = new Categories_Products();
+        foreach($request['id_category'] as $id_category){
+            //dd($category);
+            $categories_products::create([
+                'id_category' => $id_category,
+                'id_product' => $id
+            ]);
+        }
+        //thêm vào bảng size_product
+        // $sizes_products = new Sizes_Products();
+        // foreach($request['id_size'] as $id_size){
+        //     //dd($id_size);
+        //     $sizes_products::create([
+        //         'id_size' => $id_size,
+        //         'id_product' => $request['id_product']
+        //     ]);
+        // }
+        // //thêm vào bảng products
+        // $colors_products = new Colors_Products();
+        // foreach($request['id_color'] as $id_color){
+        //     $colors_products::create([
+        //         'id_color' => $id_color,
+        //         'id_product' => $request['id_product']
+        //     ]);
+        // }
         if ($request->has('file_upload')) {
             $file = $request->file_upload;
             // $ten_file = $file->getClientoriginalName();

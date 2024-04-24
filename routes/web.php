@@ -29,12 +29,15 @@ Route::get('/product-list', [userController::class, 'productListForm'])->name('u
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
+Route::get('/info-ordered', [userController::class, 'infoOrderForm'])->name('user/info-order');
 // ->order-tuấn
 Route::post('/cartandpay',[UserOrderController::class, 'storeCartandPay'])->name('store.cartandpay');
 Route::post('/deleteorder', [UserOrderController::class, 'deleteCart'])->name('user.deleteorder');
 Route::post('/deleteorderall', [UserOrderController::class, 'deleteCartAll'])->name('user.deleteorderall');
 Route::post('/updatecart', [UserOrderController::class, 'updateCart'])->name('user.updatecart');
 Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/order');
+//->payment-tuấn
+Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.payment');
 
 // Admin
 Route::prefix('admin')->group(function(){
