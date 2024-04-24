@@ -248,6 +248,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  function dataToPayment(){
+    let color = document.getElementById("");
+  }
+</script>
 @endsection
     
   

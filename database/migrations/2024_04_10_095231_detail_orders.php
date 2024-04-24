@@ -14,11 +14,11 @@ return new class extends Migration
         //
         Schema::create('detail_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('code_order',8);
+            $table->string('code_order',10)->unique();
             $table->string('id_product',5); 
             $table->string('size',20);
             $table->string('color',20);
-            $table->integer('quantily');
+            $table->integer('quantity');
             $table->double('price_one_product');
             $table->double('total_price');
  

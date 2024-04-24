@@ -34,7 +34,10 @@
                 <div class="product-item">
                   <a href="{{route('user/product-detail',$product->id_product)}}"><img width="100%" src="uploads/{{$product->img_product}}" alt=""></a>
                   <h4><a href="{{route('user/product-detail',$product->id_product)}}">{{$product->name_product}}</a></h4>
-                  <span>{{$product->price_product}}</span>
+                  @php                   
+                    $price_product = number_format($product->price_product, 0, ',', '.');
+                  @endphp
+                  <span>{{$price_product}} VND</span>
                 </div>
               </div>
 
