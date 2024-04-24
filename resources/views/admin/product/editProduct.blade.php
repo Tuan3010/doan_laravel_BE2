@@ -33,26 +33,22 @@
           <div class="col">
             <div class="p-3 border rounded bg-light">
               <h5 style="font-weight:bold">Danh Mục</h5>
-              <php $demcategory=0; ?>
                 @foreach($data['categories'] as $category)
-                
-                    <input type="checkbox" name="id_category[]" value="{{$category->id}}" id="id_category[]">
-                    <label style="font-weight:400" for="">{{$category->name_category}}</label><br>
-                
-                    
-                
+                    <input type="checkbox" name="id_category[]" value="{{$category->id}}" id="id_category[]" {{ (in_array($category->id, $data['categors_productsChecked'])) ? 'checked' : '' }}>
+                    <label style="font-weight:400" for="">{{$category->name_category}}</label><br>   
                 @endforeach
                 @if ($errors->has('id_category'))
                 <span class="text-danger">{{ $errors->first('id_category') }}</span>
                 @endif
             </div>
           </div>
+          <!-- size_productChecked -->
           <div class="col">
             <div class="p-3 border rounded bg-light">
-              <h5 style="font-weight:bold">Màu sắc</h5>
-              <php $demcolor=0 ?>
-                @foreach($data['colors'] as $color)
-                <input type="checkbox" name="id_color[]" value="{{$color->id}}" id="id_color[]">
+              <h5 style="font-weight:bold">Màu sắc</h5>        
+                @foreach($data['colors'] as $color)   
+                <input type="checkbox" name="id_color[]" value="{{$color->id}}" id="id_color[]" 
+                {{ (in_array($color->id, $data['color_productChecked'])) ? 'checked' : '' }}>
                 <label style="font-weight:400" for="">{{$color->name_color}}</label><br>
                 @endforeach
                 @if ($errors->has('id_color'))
@@ -63,9 +59,9 @@
           <div class="col">
             <div class="p-3 border rounded bg-light">
               <h5 style="font-weight:bold">Size</h5>
-              <php $demsize=0 ?>
                 @foreach($data['sizes'] as $size)
-                  <input type="checkbox" name="id_size[]" value="{{$size->id}}" id="id_size[]">
+                  <input type="checkbox" name="id_size[]" value="{{$size->id}}" id="id_size[]"
+                  {{ (in_array($size->id, $data['size_productChecked'])) ? 'checked' : '' }}>
                   <label style="font-weight:400" for="">{{$size->name_size}}</label><br>
                 @endforeach
                 @if ($errors->has('id_size'))
