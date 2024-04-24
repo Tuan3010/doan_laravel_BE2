@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function orderForm(){
         
         $cartArr = Session::get('cart',[]);
-        // $cartUser = [];
+        $cartUser = [];
         // print_r($cartArr);
         //attempt(['user_name' => 'tuan', 'password' => '111'])
         if (Auth::check()) {

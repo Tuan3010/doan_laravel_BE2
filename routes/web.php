@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\colorController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\sizeController;
+use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\OrderController as UserOrderController;
@@ -45,6 +46,7 @@ Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
     Route::resource('order',OrderController::class);
     Route::post('order/comfirm',[OrderController::class, 'confirmOrder'])->name('order.confirm');
+    Route::resource('user',AdminUserController::class);
 });
 //Lượng-category
 //hiển thị thêm danh mục
