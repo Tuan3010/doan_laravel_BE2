@@ -28,9 +28,9 @@ Route::post('/register',[userController::class, 'registerStore'])->name('registe
 Route::get('/adore-list', [userController::class, 'adoreForm'])->name('user/adore-list');
 Route::get('/product-detail/{id_product}', [userController::class, 'productDetailForm'])->name('user/product-detail');
 Route::get('/product-list', [userController::class, 'productListForm'])->name('user/product-list');
-Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
+
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product');
-Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
+
 Route::get('/info-ordered', [userController::class, 'infoOrderForm'])->name('user/info-order');
 // ->order-tuấn
 Route::post('/cartandpay',[UserOrderController::class, 'storeCartandPay'])->name('store.cartandpay');
@@ -43,6 +43,10 @@ Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.pay
 // ->changepassword-tuấn
 Route::get('/changepass',[userController::class, 'changePassForm'])->name('user/changepass');
 Route::post('/changepass',[userController::class, 'changePass'])->name('user.storechangepass');
+// ->search order handle - tuấn
+// Route::post('/changepass',[userController::class, 'changePass'])->name('user.storechangepass');
+Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
+Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 // Admin
 Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
