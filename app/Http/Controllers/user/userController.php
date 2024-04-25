@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class userController extends Controller
 {
@@ -123,6 +124,42 @@ class userController extends Controller
         Session::flush();
         Auth::logout();
         return redirect(route('user/index'));
+    }
+    //Change password
+    public function changePassForm(){
+        if (Auth::check()) {
+            return view('user/change-pass');
+        }else{
+            return redirect()->route('user/index');
+        }
+    }
+    public function changePass(Request $request){
+        // $requestValidated = $request->validate([
+        //     'pass_old' => 'required',
+        //     'pass_new' => 'required',
+        //     'pass_confirm' => 'required'
+        // ]);
+        if (Auth::check()) {
+            $passwordData = Auth::user()['password'];
+            $id_user = Auth::user()['id'];
+            $passwordRequest = $request->get('pass_old');
+            if (Hash::check($passwordRequest,$passwordData)) {
+                if ($request->get('pass_new') == $request->get('pass_confirm') && $request->get('pass_new') != null) {
+                    if (strlen($request->get('pass_new')) > 5) {
+                        $passHash = Hash::make($request->get('pass_new'));
+                        User::where('id',$id_user)->update(['password'=> $passHash]);
+                        return redirect()->route('user/changepass')->withSuccess('Thay đổi mật khẩu thành công');
+                    }else{
+                        return redirect()->route('user/changepass')->withErrors(['newpasslenght' => 'Yêu cầu tối thiểu 6 kí tự']);
+
+                    }
+                }else{
+                    return redirect()->route('user/changepass')->withErrors(['newpass' => 'Vui lòng nhập mật khẩu mới']);
+                }
+            }else{
+                return redirect()->route('user/changepass')->withErrors(['oldpass' => 'Mật khẩu cũ không chính xác']);
+            }
+        }
     }
 
     

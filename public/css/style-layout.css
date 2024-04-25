@@ -11,6 +11,23 @@ html{
   padding: 0;
   margin: 0;
 }
+/* class dùng chung */
+.alert-danger{
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  padding: 10px;
+  border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.alert-success{
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  padding: 10px;
+  border: 1px solid transparent;
+    border-radius: .25rem;
+}
 
 body {
   display: flex;
