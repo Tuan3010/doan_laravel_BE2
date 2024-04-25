@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Color;
+use App\Models\Order;
 use App\Models\Size;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -88,8 +89,24 @@ class userController extends Controller
     public function searchOrderForm(){
         return view('user/search-order');
     }
-    public function resultsearchOrderForm(){
-        return view('user/result-search-order');
+    public function resultsearchOrderForm(Request $request){
+        $code_order = $request->get('code_order');
+        $phone = $request->get('phone');
+        $order = Order::where('code_order',$code_order)
+                      ->where('phone',$phone)
+                      ->first();
+        $products = Product::join('detail_orders', 'products.id_product', '=', 'detail_orders.id_product')
+        ->select('products.name_product', 'detail_orders.price_one_product',
+         'detail_orders.quantity', 'detail_orders.size', 'detail_orders.color',
+          'detail_orders.total_price','products.img_product')
+        ->get();
+          
+        if ($order != null) {
+            return view('user/result-search-order',compact('products','order'));
+        }else{
+            return redirect()->route('user/search-order')->withError('Xin lỗi hệ thống không tìm thấy đơn hàng bạn muốn tra cứu');
+        };
+
     }
     public function infoOrderForm(){
         $codebill = Session::get('code_cart');
@@ -161,6 +178,8 @@ class userController extends Controller
             }
         }
     }
+    public function searchOrder(){
 
+    }
     
 }
