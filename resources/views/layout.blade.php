@@ -20,6 +20,7 @@
         <li class="nav1-list__item"><a href="{{route('user/adore-list')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_heart_header.svg" alt=""> Yêu thích</a></li>
         <li class="nav1-list__item"><a href="{{route('user/search-order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_tra_cuu_don_hang.svg" alt=""> Tra cứu đơn hàng</a></li>
         <li class="nav1-list__item"><a href="{{route('listCategory')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Amdin</a></li>
+        <li class="nav1-list__item"><a href="{{route('user/changepass')}}">Thay đổi mật khẩu</li>
         @else
         <li class="nav1-list__item"><a href="{{route('user/login')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Đăng nhập</a></li>
         @endauth
@@ -59,12 +60,12 @@
       </div>
     </div>
   </div>
-  @if(session()->has('error'))
+  {{-- @if(session()->has('error'))
         <div class="alert alert-danger">{{session('error')}}</div>
         @endif
         @if(session()->has('success'))
         <div class="alert alert-success">{{session('success')}}</div>
-  @endif
+  @endif --}}
   {{-- Content --}}
   @yield('content')
   {{-- EndContent --}}

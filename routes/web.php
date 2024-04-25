@@ -40,7 +40,9 @@ Route::post('/updatecart', [UserOrderController::class, 'updateCart'])->name('us
 Route::get('/order', [UserOrderController::class, 'orderForm'])->name('user/order');
 //->payment-tuấn
 Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.payment');
-
+// ->changepassword-tuấn
+Route::get('/changepass',[userController::class, 'changePassForm'])->name('user/changepass');
+Route::post('/changepass',[userController::class, 'changePass'])->name('user.storechangepass');
 // Admin
 Route::prefix('admin')->group(function(){
   //Route::resource('payment',PaymentController::class);
