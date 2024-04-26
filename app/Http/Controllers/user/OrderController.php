@@ -334,7 +334,7 @@ class OrderController extends Controller
             return redirect()->route('user/info-order');
         }else{
             $carts = Session::get('cart',[]);
-            if ($carts->count() > 0) {
+            if (count($carts) > 0) {
                 foreach ($carts as $item) {
                     Details_Orders::create([
                         'code_order' => $codebill,
@@ -342,8 +342,8 @@ class OrderController extends Controller
                         'size' => $item['size'],
                         'color' => $item['color'],
                         'quantity' => $item['quantity'],
-                        'price_one_product' => $item['price'],
-                        'total_price' => $item['price'] * $item['quantity'],
+                        'price_one_product' => $item['price_product'],
+                        'total_price' => $item['price_product'] * $item['quantity'],
                     ]);
                 }
                 Order::create([

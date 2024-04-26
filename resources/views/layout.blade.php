@@ -22,6 +22,7 @@
         <li class="nav1-list__item"><a href="{{route('listCategory')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Amdin</a></li>
         <li class="nav1-list__item"><a href="{{route('user/changepass')}}">Thay đổi mật khẩu</li>
         @else
+        <li class="nav1-list__item"><a href="{{route('user/order')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_gio_hang.svg" alt="">Giỏ hàng &#40; {{Session::get('countCart')}} &#41;</a></li>
         <li class="nav1-list__item"><a href="{{route('user/login')}}"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images//svg/icon_dang_nhap.svg" alt=""> Đăng nhập</a></li>
         @endauth
       </ul>

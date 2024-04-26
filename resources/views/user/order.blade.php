@@ -24,7 +24,7 @@
                   </div>
                   <div class="media-right">
                     @php
-                      $number = $cartArr[$i]['price_product'];
+                      $number = $cartArr[$i]['price_product'] * $cartArr[$i]['quantity'];
                       $formatted_money = number_format($number, 0, ',', '.'); // 1.000.000
                       $totalMoney += $number;                     
                     @endphp

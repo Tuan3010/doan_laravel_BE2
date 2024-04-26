@@ -1,0 +1,8 @@
+1. Phân trang sản phẩm
+2. Phân quyền admin. user
+3. Payment, Yêu thích;
+4. Hiển thị category sản phẩm ở trang danh sách sản phẩm
+5. Hiển thị danh sách color(khi click danh sách color);
+6. Hiển thị danh sách theo giá tiền
+7. Tìm kiếm sản phẩm
+8. Chức năng gửi email cho người dùng
