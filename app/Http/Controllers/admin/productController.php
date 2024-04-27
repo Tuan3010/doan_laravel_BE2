@@ -181,17 +181,13 @@ class productController extends Controller
             'name_product' => 'required',
             'price_product' => 'required|numeric',
             'des_product' => 'required',
-            'file_upload' => 'required|image',    
+            'file_upload' => 'image',    
             'id_category' => 'required',
             'id_color' => 'required',
             'id_size' => 'required'  
         ]);
         //xóa ảnh uploads
         $product = Product::find($id);
-        $img_path = public_path('uploads/') . $product->img_product;
-        if(File::exists($img_path)){
-            File::delete($img_path);
-        }
         //xóa ảnh dữ liệu quan hệ Sizes_Products để cập nhật
         $sizeproduct = new Sizes_Products();
         $sizeproduct->where('id_product',$id)->delete();
@@ -221,24 +217,13 @@ class productController extends Controller
                 'id_product' => $id
             ]);
         }
-        //thêm vào bảng size_product
-        // $sizes_products = new Sizes_Products();
-        // foreach($request['id_size'] as $id_size){
-        //     //dd($id_size);
-        //     $sizes_products::create([
-        //         'id_size' => $id_size,
-        //         'id_product' => $request['id_product']
-        //     ]);
-        // }
-        // //thêm vào bảng products
-        // $colors_products = new Colors_Products();
-        // foreach($request['id_color'] as $id_color){
-        //     $colors_products::create([
-        //         'id_color' => $id_color,
-        //         'id_product' => $request['id_product']
-        //     ]);
-        // }
+        //khi chọn chọn ảnh
         if ($request->has('file_upload')) {
+            //xóa file ảnh trong upload
+            $img_path = public_path('uploads/') . $product->img_product;
+            if(File::exists($img_path)){
+                File::delete($img_path);
+            }
             $file = $request->file_upload;
             // $ten_file = $file->getClientoriginalName();
             
@@ -251,9 +236,7 @@ class productController extends Controller
             //$request->merge(['img_product' => $ten_file]); 
             //truong cua ten file sau khi ep kieu la image
             //dd($img_product);
-        
-        }
-        //cập nhật lại table img
+              //cập nhật lại table img
         //--xóa
         $img = Image::where('name_img', $product->img_product)->first();
         //dd($img);
@@ -270,7 +253,18 @@ class productController extends Controller
             'price_product' => $request['price_product'],
             'des_product' => $request['des_product'],
             'img_product' => $ten_file,
-        ]);
+        ]);       
+        }
+        //khi không chọn chọn ảnh
+        else
+        {
+            $product->update([
+                'name_product' => $request['name_product'],
+                'price_product' => $request['price_product'],
+                'des_product' => $request['des_product'],
+            ]);
+        }
+      
         return redirect(route('list-product'))->withSuccess("Cập nhật thành công!");
     }
  

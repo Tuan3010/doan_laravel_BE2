@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\colorController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\sizeController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
+use App\Http\Controllers\admin\imagesController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\OrderController as UserOrderController;
@@ -103,3 +104,11 @@ Route::post('login', [userController::class, 'authUser'])->name('check-login');/
 //-----------------------------logout_Lượng-----------------------
 Route::get('logout', [userController::class, 'logout'])->name('logout');
 
+//Crud hình ảnh Lượng
+Route::get('listImages', [imagesController::class, 'getAll'])->name('list-images');
+Route::get('createImg', [imagesController::class, 'viewCreateImg'])->name('get-create-img');
+Route::post('createImg', [imagesController::class, 'CreateImg'])->name('post-create-img');
+Route::delete('/listImages/{id}',[imagesController::class, 'deleteImage'])->name('delete-img');
+Route::get('/listImages/{id}',[imagesController::class, 'viewUpdateImage'])->name('edit-img');
+Route::post('listImages/{id}', [imagesController::class, 'updateImage'])->name('update-image');
+// /return view('admin/images/createImages');
