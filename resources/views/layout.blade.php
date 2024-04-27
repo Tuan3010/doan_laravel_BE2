@@ -34,9 +34,9 @@
       <div class="header-nav2-cate">
         <ul class="header-nav2-list">
           <li class="nav2-list__item"><a href="{{route('user/product-list')}}">Sản phẩm</a></li>
-          <li class="nav2-list__item"><a href="">Quần </a></li>
-          <li class="nav2-list__item"><a href="">Áo</a></li>
-          <li class="nav2-list__item"><a href="">Giày</a></li>
+          <li class="nav2-list__item"><a href="">Nam</a></li>
+          <li class="nav2-list__item"><a href="">Nữ</a></li>
+          <li class="nav2-list__item"><a href="">Unisex</a></li>
           <li class="nav2-list__item "><a href=""><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/DiscoverYOU.svg" alt=""></a></li>
         </ul>
       </div>
