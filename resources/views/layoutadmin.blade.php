@@ -125,14 +125,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="pages/kanban.html" class="nav-link">
-                <i class="nav-icon fas fa-columns"></i>
-                <p>
-                  Quản lý bài viết
-                </p>
-              </a>
-            </li>
+            
             <li class="nav-item">
               <a href="{{route('user.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-columns"></i>
