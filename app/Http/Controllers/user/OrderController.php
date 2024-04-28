@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Details_Orders;
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -72,7 +73,8 @@ class OrderController extends Controller
             }
         }
         $totalMoney = 0;
-        return view('user/order',compact('cartArr','cartUser', 'totalMoney'));
+        $payments = Payment::all();
+        return view('user/order',compact('cartArr','cartUser', 'totalMoney','payments'));
     }
 
     public function storeCartandPay(Request $request){
