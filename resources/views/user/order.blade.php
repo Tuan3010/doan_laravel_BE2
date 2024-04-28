@@ -224,7 +224,9 @@
               </div>
               <div class="warp-item-form">                 
                 <select name="payment" id="payment">
-                  <option value="1">Thanh toán Trực Tiếp Khi Giao Hàng</option>
+                  @foreach ($payments as $item)      
+                    <option value="{{$item->id}}">{{$item->name_payment}}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="warp-item-form-drive"></div>

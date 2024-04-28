@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\sizeController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\admin\imagesController;
+use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\OrderController as UserOrderController;
@@ -50,7 +51,7 @@ Route::get('/result-search-order', [userController::class, 'resultsearchOrderFor
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
 // Admin
 Route::prefix('admin')->group(function(){
-  //Route::resource('payment',PaymentController::class);
+    Route::resource('payment',PaymentController::class);
     Route::resource('order',OrderController::class);
     Route::post('order/comfirm',[OrderController::class, 'confirmOrder'])->name('order.confirm');
     Route::resource('user',AdminUserController::class);
