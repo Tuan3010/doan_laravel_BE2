@@ -16,11 +16,32 @@
             <div class="left-cate-main">
               <span class="left-cate-main-title">DÒNG SẢN PHẨM</span>
               <ul  class="left-cate-main-list">
-                <li class="left-cate-main-item"><a href="">Basas</a></li>
-                <li class="left-cate-main-item"><a href="">Vintas</a></li>
-                <li class="left-cate-main-item"><a href="">Urbans</a></li>
+                @foreach ($categories as $item)            
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['idcate' => $item->id])}}">{{$item->name_category}}</a></li>
+                @endforeach
               </ul>
               <div class="warp-item-form-drive"></div>
+
+              <span class="left-cate-main-title">GIÁ</span>
+              <ul  class="left-cate-main-list">
+   
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['price1' => 400000 ,'price2' => 499000])}}">400K - 499K</a></li>
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['price1' => 300000])}}">< 300k</a></li>
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['price1' => 500000 ,'price2' => 599000])}}">500K - 599K</a></li>
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['price1' => 600000])}}">> 600K</a></li>
+                
+              </ul>
+              <div class="warp-item-form-drive"></div>
+
+
+              <span class="left-cate-main-title">MÀU SẢN PHẨM</span>
+              <ul  class="left-cate-main-list">
+                @foreach ($colors as $item)            
+                  <li class="left-cate-main-item"><a href="{{route('user/product-list',['idcolor' => $item->id])}}">{{$item->name_color}}</a></li>
+                @endforeach
+              </ul>
+              <div class="warp-item-form-drive"></div>
+
             </div>
             
           </div>

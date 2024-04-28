@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Categories;
 use App\Models\Color;
 use App\Models\Order;
 use App\Models\Size;
@@ -79,9 +80,42 @@ class userController extends Controller
         return view('user/product-detail',compact('productItem','colors','sizes'));
     }
 
-    public function productListForm(){
+    public function productListForm(Request $request){
+        $categories = Categories::where('type',1)->get();
         $productList = Product::all();
-        return view('user/product-list',compact('productList'));
+        $colors = Color::all();
+        // Xử lí tìm sản phẩm có giá X
+        if ($request->has('price1') && $request->get('price1') == 300000 ) {
+            $price = $request->get('price1');
+            $productList = Product::where('price_product','<',$price)->get();                             
+            // Truy vaans sp co gia x
+        }elseif($request->has('price1') && $request->get('price1') == 600000 ){
+            $price = $request->get('price1');
+            $productList = Product::where('price_product','>',$price)->get();
+        }
+        if ($request->has('price1') && $request->has('price2')){
+            $price1 = $request->get('price1');
+            $price2 = $request->get('price2');
+            $productList = Product::where('price_product','>=',$price1)
+                                    ->where('price_product','<=',$price2)
+                                    ->get();
+        }
+        // Xử lí tìm sản phẩm có cate X
+        if ($request->has('idcate')) {
+            $id = $request->get('idcate');
+            $productList = Product::join('categories_products', 'categories_products.id_product', '=', 'products.id_product')
+                                    ->where('categories_products.id_category', '=', $id)
+                                    ->get();
+        }
+        // Xử lí tìm màu sắc
+        if ($request->has('idcolor')) {
+            $id = $request->get('idcolor');
+            $productList = Product::join('colors_products', 'colors_products.id_product', '=', 'products.id_product')
+                                    ->where('colors_products.id_color', '=', $id)
+                                    ->get();
+        }
+        return view('user/product-list',compact('productList','categories','colors',));
+        
     }
     public function searchProductForm(){
         return view('user/search-product');
