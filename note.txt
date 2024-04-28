@@ -6,3 +6,4 @@
 6. Hiển thị danh sách theo giá tiền
 7. Tìm kiếm sản phẩm
 8. Chức năng gửi email cho người dùng
+9. Khi xóa tài khoản của bản thân thì tự out ra

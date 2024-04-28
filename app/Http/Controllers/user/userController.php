@@ -202,10 +202,9 @@ class userController extends Controller
                         return redirect()->route('user/changepass')->withSuccess('Thay đổi mật khẩu thành công');
                     }else{
                         return redirect()->route('user/changepass')->withErrors(['newpasslenght' => 'Yêu cầu tối thiểu 6 kí tự']);
-
                     }
                 }else{
-                    return redirect()->route('user/changepass')->withErrors(['newpass' => 'Vui lòng nhập mật khẩu mới']);
+                    return redirect()->route('user/changepass')->withErrors(['newpass' => 'Mật khẩu mới và xác nhận lại mật khẩu không chính xác']);
                 }
             }else{
                 return redirect()->route('user/changepass')->withErrors(['oldpass' => 'Mật khẩu cũ không chính xác']);

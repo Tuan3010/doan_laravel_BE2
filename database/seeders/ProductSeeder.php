@@ -105,81 +105,113 @@ class ProductSeeder extends Seeder
         ]);
         // --------- Thêm màu sắc ----
         DB::table('colors')->insert([
+            'id'         => 1,
             'name_color' => 'Đen',
         ]);
         DB::table('colors')->insert([
+            'id'         => 2,
             'name_color' => 'Xanh Lá',
         ]);
         DB::table('colors')->insert([
+            'id'         => 3,
             'name_color' => 'Xanh Dương',
         ]);
         DB::table('colors')->insert([
+            'id'         => 4,
             'name_color' => 'Hồng',
         ]);
         DB::table('colors')->insert([
+            'id'         => 5,
             'name_color' => 'Nâu',
         ]);
         DB::table('colors')->insert([
+            'id'         => 6,
             'name_color' => 'Xám',
         ]);
         DB::table('colors')->insert([
+            'id'         => 7,
             'name_color' => 'Trắng',
         ]);
         // Thêm size
         DB::table('sizes')->insert([
-            'name_size' => '36',
-        ]);
-        DB::table('sizes')->insert([
+            'id'         => 1,
             'name_size' => '35',
         ]);
         DB::table('sizes')->insert([
+            'id'         => 2,
+            'name_size' => '36',
+        ]);
+        DB::table('sizes')->insert([
+            'id'         => 3,
             'name_size' => '37',
         ]);
         DB::table('sizes')->insert([
+            'id'         => 4,
             'name_size' => '38',
         ]);
         DB::table('sizes')->insert([
+            'id'         => 5,
             'name_size' => '39',
         ]);
         DB::table('sizes')->insert([
+            'id'         => 6,
             'name_size' => '40',
         ]);
         DB::table('sizes')->insert([
+            'id'         => 7,
             'name_size' => '41',
+        ]);
+        DB::table('sizes')->insert([
+            'id'         => 8,
+            'name_size' => 'Free',
         ]);
         // Thêm category
         DB::table('categories')->insert([
+            'id'         => 1,
             'name_category' => 'Vrler',
             'type' => '1',
         ]);
         DB::table('categories')->insert([
+            'id'         => 2,
             'name_category' => 'Vintas',
             'type' => '1',
         ]);
         DB::table('categories')->insert([
+            'id'         => 3,
             'name_category' => 'Urban',
             'type' => '1',
         ]);
         DB::table('categories')->insert([
-            'name_category' => 'Dcm',
+            'id'         => 4,
+            'name_category' => 'Bassas',
             'type' => '1',
         ]);
         DB::table('categories')->insert([
+            'id'         => 5,
             'name_category' => 'Track 6',
             'type' => '1',
         ]);
         DB::table('categories')->insert([
+            'id'         => 6,
             'name_category' => 'Nam',
             'type' => '0',
         ]);
         DB::table('categories')->insert([
+            'id'         => 7,
             'name_category' => 'Nữ',
             'type' => '0',
         ]);
         DB::table('categories')->insert([
+            'id'         => 8,
             'name_category' => 'Unisex',
             'type' => '0',
         ]);
+        // Thêm thanh toán
+        DB::table('payments')->insert([
+            'name_payment' => 'Thanh toán khi nhận hàng'
+        ]);
+
+        
         
     }
 }

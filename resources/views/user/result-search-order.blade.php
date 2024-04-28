@@ -44,7 +44,7 @@
               <div class="row">
                 <div class="col l-4">
                   <div class="img-product">
-                    <img width="100%" src="https://ananas.vn/wp-content/uploads/pro_track6_A6T002_1.jpg" alt="">
+                    <img width="100%" src="https://ananas.vn/wp-content/uploads/{{$item->img_product}}" alt="">
                   </div>
                 </div>
                 <div class="col l-8">

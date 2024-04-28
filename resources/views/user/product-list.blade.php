@@ -8,9 +8,9 @@
         <div class="col l-3">
           <div class="warp-left">
             <ul class="left-cate-title-list">
-              <li class="left-cate-title-item"><a href="">TẤT CẢ</a></li>
-              <li class="left-cate-title-item"><a href="">NAM</a></li>
-              <li class="left-cate-title-item"><a href="">NỮ</a></li>
+              <li class="left-cate-title-item"><a href="{{route('user/product-list')}}">TẤT CẢ</a></li>
+              <li class="left-cate-title-item"><a href="{{route('user/product-list',['idcate' => 6])}}">NAM</a></li>
+              <li class="left-cate-title-item"><a href="{{route('user/product-list',['idcate' => 7])}}">NỮ</a></li>
             </ul>
             <hr>
             <div class="left-cate-main">

@@ -13,11 +13,9 @@
       @csrf
       <div class="warp-item">
         <input  name="pass_old" type="text" placeholder="Mật khẩu cũ ">
-        @if($errors->has('pass_old'))
-          <div class=" alert-danger">{{$errors->first('pass_old')}}</div>
-        @endif
+        
         @if($errors->has('oldpass'))
-          <div class=" alert-danger">{{$errors->first('pass_old')}}</div>
+          <div class=" alert-danger">{{$errors->first('oldpass')}}</div>
         @endif
 
       </div>
