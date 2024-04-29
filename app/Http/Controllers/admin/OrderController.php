@@ -7,6 +7,8 @@ use App\Models\Details_Orders;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class OrderController extends Controller
 {
@@ -85,7 +87,24 @@ class OrderController extends Controller
         return redirect()->route('order.index');
     }
     public function confirmOrder(Request $request){
+        // Lấy email để gửi
+        $inputemail = $request->get('email');
+        // Lấy thông tin người dùng 
+        $infoUser = $request->all();
+        // Truy vấn phương thức thanh toán
+        $namePayment = Payment::find($request['id_payment'])['name_payment'];
+        //danh sách chi tiết và Truy vấn tên sản phẩm và ảnh sản phẩm
+        $detailsOrders = Details_Orders::select('detail_orders.*','products.name_product','products.img_product')
+                                        ->join('products', 'detail_orders.id_product', '=' , 'products.id_product')
+                                        ->where('code_order',$request->get('code_order'))
+                                        ->get();
         Order::where('code_order',$request->get('code_order'))->update(['status' => 1]);
+
+        Mail::send('admin.order.email',compact('infoUser','namePayment','detailsOrders'),function($email) use($inputemail){
+            $email->subject('Đơn hàng cho các tình iu của shop <3');
+            $email->to($inputemail,'');
+        });
         return redirect()->route('order.index');
     }
+
 }

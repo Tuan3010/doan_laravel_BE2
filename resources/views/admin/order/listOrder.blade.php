@@ -112,12 +112,18 @@
                                 <form style="display: inline-block;" action="{{route('order.confirm')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="code_order" value="{{$item->code_order}}">
+                                    <input type="hidden" name="name_buyer" value="{{$item->name_buyer}}">
+                                    <input type="hidden" name="address" value="{{$item->address}}">
+                                    <input type="hidden" name="phone" value="{{$item->phone}}">
+                                    <input type="hidden" name="email" value="{{$item->email}}">
+                                    <input type="hidden" name="id_payment" value="{{$item->id_payment}}">
+                                    <input type="hidden" name="code_order" value="{{$item->code_order}}">
                                     <button class="btn btn-warning btn-sm" >                                                                               
                                             unconfimred
                                     </button>
                                 </form>
                             @else
-                                <a href="" class="btn btn-success btn-sm text-white">
+                                <a href="#" class="btn btn-success btn-sm text-white">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                     confirmed</a>
                             @endif 
