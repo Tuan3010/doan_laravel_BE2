@@ -45,12 +45,12 @@ Route::post('/payment',[UserOrderController::class, 'payment'])->name('store.pay
 Route::get('/changepass',[userController::class, 'changePassForm'])->name('user/changepass');
 Route::post('/changepass',[userController::class, 'changePass'])->name('user.storechangepass');
 // ->search order handle - tuấn
-// Route::post('/changepass',[userController::class, 'changePass'])->name('user.storechangepass');
 Route::get('/result-search-order', [userController::class, 'resultsearchOrderForm'])->name('user/search-search-order');
 Route::get('/search-order', [userController::class, 'searchOrderForm'])->name('user/search-order');
+// ->sendmai - tuấn
 // Admin
 Route::prefix('admin')->group(function(){
-  //Route::resource('payment',PaymentController::class);
+    Route::resource('payment',PaymentController::class);
     Route::resource('order',OrderController::class);
     Route::post('order/comfirm',[OrderController::class, 'confirmOrder'])->name('order.confirm');
     Route::resource('user',AdminUserController::class);
