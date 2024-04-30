@@ -13,18 +13,39 @@
           </div>
           <div class="img-product-list">
             <div class="row">
+              @php
+                  $num = 4;
+              @endphp
+              @if (!($images->isEmpty()))
+                  @foreach ($images as $item)
+                  @php
+                      $num--;
+                  @endphp
+                  <div class="col l-3">
+                    <img style="width: 100%" src="../uploads/{{$item->name_img}}" alt="">
+                  </div>
+                  @endforeach
+                  @for ($i = $num; 0 < $i; $i--)
+                       <div class="col l-3">
+                          <img style="width: 100%" src="../img/imgDeffer/images.png" alt="">
+                        </div>
+                  @endfor
+              @else
+                             
               <div class="col l-3">
-                <img style="width: 100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1.jpg" alt="">
+                <img style="width: 100%" src="../img/imgDeffer/images.png" alt="">
               </div>
               <div class="col l-3">
-                <img style="width: 100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1.jpg" alt="">
+                <img style="width: 100%" src="../img/imgDeffer/images.png" alt="">
               </div>
               <div class="col l-3">
-                <img style="width: 100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1.jpg" alt="">
+                <img style="width: 100%" src="../img/imgDeffer/images.png" alt="">
               </div>
               <div class="col l-3">
-                <img style="width: 100%" src="https://ananas.vn/wp-content/uploads/Pro_AV00208_1.jpg" alt="">
+                <img style="width: 100%" src="../img/imgDeffer/images.png" alt="">
               </div>
+              @endif
+              
               
               
             </div>
@@ -66,6 +87,7 @@
             <input class="btn-submit" type="submit" name="pay"  value="Thanh Toán">
           </form>
           <form  action="" method="post" style="position: relative;">
+            <input type="hidden" name="id_product" value="{{$productItem->id_product}}">
             <button class="btn-like" type="submit"><img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/Heart_product_1.svg" alt=""></button>
           </form>
           <h5 class="des-product-title">Thông tin sản phẩm</h5>

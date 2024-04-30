@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Categories;
 use App\Models\Color;
+use App\Models\Image;
 use App\Models\Order;
 use App\Models\Size;
 use App\Models\User;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class userController extends Controller
 {
+    public function __construct() {
+        
+    }
     // Hiển thị danh sách trang
     public function index(){
         if (Auth::check()) {
@@ -59,7 +63,11 @@ class userController extends Controller
         return redirect()->route('user/register')->with('success','Đăng kí thành công !');
     }
     public function adoreForm(){
-        return view('user/adore-list');
+        if (Auth::check()) {
+            return view('user/adore-list');
+        }
+        return redirect()->route('user/login');
+        
     }
     // Xử lí chi tiết sản phẩm
     public function productDetailForm($id_product){
@@ -77,7 +85,10 @@ class userController extends Controller
                         ->where('sizes_products.id_product',$id_product)
                         ->orderBy('sizes.name_size', 'asc')
                         ->get();
-        return view('user/product-detail',compact('productItem','colors','sizes'));
+        // Lấy ds hình ảnh của sản phẩm
+        $images = Image::where('id_product',$id_product)->get();
+        
+        return view('user/product-detail',compact('images','productItem','colors','sizes'));
     }
 
     public function productListForm(Request $request){
@@ -153,7 +164,6 @@ class userController extends Controller
     public function authUser(Request $request)
     {
 
-
         $request->validate([
             'user_name' => 'required',
             'password' => 'required',
@@ -163,8 +173,13 @@ class userController extends Controller
         //dd(Auth::check($credentials));
         //kiem tra duoi database
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('user/index'))
+            if (Auth::user()['role'] == 0) {
+                return redirect()->intended(route('listCategory'))
+                ->withSuccess('Đăng nhập thành công !!');
+            }elseif(Auth::user()['role'] == 1){
+                return redirect()->intended(route('user/index'))
                 ->withSuccess('Đăng nhập thành công!!');
+            }
         }
         //{{ '$request'}};
         return redirect(route('user/login'))->withError('Email hoặc mật khẩu không đúng');
@@ -211,8 +226,6 @@ class userController extends Controller
             }
         }
     }
-    public function searchOrder(){
-
-    }
+    
     
 }
