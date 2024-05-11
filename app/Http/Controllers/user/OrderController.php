@@ -359,6 +359,7 @@ class OrderController extends Controller
                     'id_user' => 0,                              
                 ]);
                 Session::forget('cart');
+                Session::put('countCart',0);
                 Session::put('code_cart',$codebill);
                 return redirect()->route('user/info-order');
             }else{
