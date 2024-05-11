@@ -103,6 +103,40 @@ class ProductSeeder extends Seeder
             Outsole: Rubber',       
             'img_product' => 'Pro_AV00208_2-500x500.jpg',
         ]);
+        DB::table('products')->insert([
+            'id_product' => '9',
+            'name_product' => 'HIGH CREW SOCKS - ANANAS DAILY THINGS - CINNAMON STICK',       
+            'price_product' => '95000',       
+            'des_product' => 'Giới tính – /Unisex/
+            Họa tiết – /Ananas Daily Things/
+            Thành phần – /53% Cotton, 40% Polyester, 3% Spandex, 2% Nylon, 2% Elastan/',       
+            'img_product' => 'Pro_AHCS008_1-500x500.jpg',
+        ]);
+        DB::table('products')->insert([
+            'id_product' => '10',
+            'name_product' => 'TRUCKER HAT - BE POSITIVE - BLACK/WHITE',       
+            'price_product' => '275000',       
+            'des_product' => 'Trucker Hat - Be Positive màu Black/White đơn giản cùng artwork “Be Positive” mang nét tích cực của nhịp sống hiện đại. Với chất vải thun lạnh từ sợi Polyester có đệm mút và phần hậu dùng lưới mesh thông thoáng đặc trưng của Trucker Hat, đây chắc chắn là yếu tố ghi điểm cho những ngày quay cuồng, đầu bù tóc rối mà vẫn tự tin bứt phá chất tôi riêng biệt. 
+            Gender – /Unisex/
+            Size: Free Hoạ tiết – /Be Positive/         
+            Chất liệu – /100% Polyester/
+            Thêu 2D đơn giản',
+            'img_product' => 'pro_ATH005_1-500x500.jpg',
+        ]);
+        DB::table('products')->insert([
+            'id_product' => '11',
+            'name_product' => 'ANANAS "COPY" STORE BAG 001 - BLACK',       
+            'price_product' => '250000',       
+            'des_product' => 'Hướng đến sức chịu đựng và độ lì lợm cao làm cốt lõi. Ananas "Copy" Store Bag 001 được thiết kế cực kì căn bản, tiết chế hoàn toàn các chi tiết cộng thêm khác để sự đặc biệt tập trung hoàn toàn vào chất liệu chính. Túi sử dụng Canvas cao cấp với định lượng lên đến 365 gsm, có tính năng trượt nước, chấp hết các thể loại xuyên thủng từ kim loại đến chất lỏng nếu đặt dưới một cường độ tác động không quá lớn.
+            Giới tính: Unisex
+Chất liệu: Canvas, định lượng 365GSM (trượt nước)
+Thành phần chất liệu: 100% Cotton
+Kích thước: 440 x 390 x 120 mm (W x H x D)
+Dung tích: 20.5 lit
+Hoạ tiết: Ananas – DiscoverYOU
+Sử dụng phương pháp in lụa.',
+            'img_product' => 'Pro_ASTB001_1-500x500.jpeg',
+        ]);
         // --------- Thêm màu sắc ----
         DB::table('colors')->insert([
             'id'         => 1,
@@ -131,6 +165,10 @@ class ProductSeeder extends Seeder
         DB::table('colors')->insert([
             'id'         => 7,
             'name_color' => 'Trắng',
+        ]);
+        DB::table('colors')->insert([
+            'id'         => 8,
+            'name_color' => 'Tím',
         ]);
         // Thêm size
         DB::table('sizes')->insert([
@@ -206,12 +244,15 @@ class ProductSeeder extends Seeder
             'name_category' => 'Unisex',
             'type' => '0',
         ]);
+        DB::table('categories')->insert([
+            'id'         => 9,
+            'name_category' => 'Phụ Kiện',
+            'type' => '2',
+        ]);
         // Thêm thanh toán
         DB::table('payments')->insert([
             'name_payment' => 'Thanh toán khi nhận hàng'
         ]);
-
-        
         
     }
 }
