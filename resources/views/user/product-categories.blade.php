@@ -65,9 +65,7 @@
               @endforeach
             </div>
           </div>
-          <div class="wrap-paginate">
-            {{$productList->links()}}
-          </div>
+          
         </div>
 
       </div>

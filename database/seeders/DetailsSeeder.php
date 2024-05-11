@@ -57,6 +57,15 @@ class DetailsSeeder extends Seeder
             ['id_category' => 8, 'id_product' => 8],
             ['id_category' => 4, 'id_product' => 8],
         ]);
+        DB::table('categories_products')->insert([
+            ['id_category' => 9, 'id_product' => 9],
+        ]);
+        DB::table('categories_products')->insert([
+            ['id_category' => 9, 'id_product' => 10],
+        ]);
+        DB::table('categories_products')->insert([
+            ['id_category' => 9, 'id_product' => 111],
+        ]);
         
         // Thêm chi tiết màu sắc
         DB::table('colors_products')->insert([
@@ -87,6 +96,19 @@ class DetailsSeeder extends Seeder
             ['id_color' => 1, 'id_product' => 8],
             ['id_color' => 7, 'id_product' => 8],
             ['id_color' => 6, 'id_product' => 8],
+        ]);
+        DB::table('colors_products')->insert([
+            ['id_color' => 8, 'id_product' => 9],
+            ['id_color' => 7, 'id_product' => 9],
+            ['id_color' => 4, 'id_product' => 9],
+            ['id_color' => 1, 'id_product' => 9],
+            ['id_color' => 5, 'id_product' => 9],
+        ]);
+        DB::table('colors_products')->insert([
+            ['id_color' => 1, 'id_product' => 10],
+        ]);
+        DB::table('colors_products')->insert([
+            ['id_color' => 1, 'id_product' => 11],
         ]);
 
         // Thêm chi tiết size
@@ -148,6 +170,18 @@ class DetailsSeeder extends Seeder
             ['id_size' => 5, 'id_product' => 8],
             ['id_size' => 6, 'id_product' => 8],
             ['id_size' => 7, 'id_product' => 8],
+        ]);
+        DB::table('sizes_products')->insert([
+            ['id_size' => 8, 'id_product' => 9],
+            
+        ]);
+        DB::table('sizes_products')->insert([
+            ['id_size' => 8, 'id_product' => 10],
+            
+        ]);
+        DB::table('sizes_products')->insert([
+            ['id_size' => 8, 'id_product' => 11],
+            
         ]);
     }
 }

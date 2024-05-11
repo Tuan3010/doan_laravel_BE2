@@ -20,7 +20,7 @@
               <div class="col l-9">
                 <div class="media">
                   <div class="media-left">
-                    <a href=""><img style="width: 180px; height: 180px;" src="../img/imgProduct/{{$cartArr[$i]['img_product']}}" alt=""></a>
+                    <a href=""><img style="width: 180px; height: 180px;" src="../uploads/{{$cartArr[$i]['img_product']}}" alt=""></a>
                   </div>
                   <div class="media-right">
                     @php

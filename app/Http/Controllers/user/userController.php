@@ -90,10 +90,18 @@ class userController extends Controller
         
         return view('user/product-detail',compact('images','productItem','colors','sizes'));
     }
-
+    // Hiển thị danh sách tất cả sản phẩm (có phân trang) 
     public function productListForm(Request $request){
         $categories = Categories::where('type',1)->get();
-        $productList = Product::all();
+        $productList = Product::paginate(6);
+        $colors = Color::all();
+        
+        return view('user/product-list',compact('productList','categories','colors'));
+        
+    }
+    // Hiển thị danh sách theo danh mục sản phẩm
+    public function categoryProductListForm(Request $request){
+        $categories = Categories::where('type',1)->get();
         $colors = Color::all();
         // Xử lí tìm sản phẩm có giá X
         if ($request->has('price1') && $request->get('price1') == 300000 ) {
@@ -122,18 +130,19 @@ class userController extends Controller
         if ($request->has('idcolor')) {
             $id = $request->get('idcolor');
             $productList = Product::join('colors_products', 'colors_products.id_product', '=', 'products.id_product')
-                                    ->where('colors_products.id_color', '=', $id)
-                                    ->get();
+            ->where('colors_products.id_color', '=', $id)
+            ->get();
         }
-        return view('user/product-list',compact('productList','categories','colors',));
-        
+        return view('user/product-categories',compact('productList','categories','colors'));
     }
     public function searchProductForm(){
         return view('user/search-product');
     }
+
     public function searchOrderForm(){
         return view('user/search-order');
     }
+
     public function resultsearchOrderForm(Request $request){
         $code_order = $request->get('code_order');
         $phone = $request->get('phone');

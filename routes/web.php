@@ -29,8 +29,8 @@ Route::get('/register', [userController::class, 'registerForm'])->name('user/reg
 Route::post('/register',[userController::class, 'registerStore'])->name('register.store');
 Route::get('/adore-list', [userController::class, 'adoreForm'])->name('user/adore-list')->middleware('adminnotacess');
 Route::get('/product-detail/{id_product}', [userController::class, 'productDetailForm'])->name('user/product-detail')->middleware('adminnotacess');;
-Route::get('/product-list', [userController::class, 'productListForm'])->name('user/product-list')->middleware('adminnotacess');;
-
+Route::get('/product-list', [userController::class, 'productListForm'])->name('user/product-list')->middleware('adminnotacess');
+Route::get('/product-categories', [userController::class, 'categoryProductListForm'])->name('user/product-categories')->middleware('adminnotacess');;
 Route::get('/search-product', [userController::class, 'searchProductForm'])->name('user/search-product')->middleware('adminnotacess');;
 
 Route::get('/info-ordered', [userController::class, 'infoOrderForm'])->name('user/info-order')->middleware('adminnotacess');;
