@@ -9,4 +9,5 @@
 9. Khi xóa tài khoản của bản thân thì tự out ra
 kbqz hrfx ovbr zvvi
 10.Trang không tìm thấy sẽ xuất trang 404
+d
 ->('Xử lí size == free thì không tính toán')
