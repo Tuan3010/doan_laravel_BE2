@@ -146,16 +146,21 @@ class userController extends Controller
     public function resultsearchOrderForm(Request $request){
         $code_order = $request->get('code_order');
         $phone = $request->get('phone');
+        
         $order = Order::where('code_order',$code_order)
                       ->where('phone',$phone)
                       ->first();
-        $products = Product::join('detail_orders', 'products.id_product', '=', 'detail_orders.id_product')
+
+                      
+        
+          
+        if ($order != null) {
+            $products = Product::join('detail_orders', 'products.id_product', '=', 'detail_orders.id_product')
         ->select('products.name_product', 'detail_orders.price_one_product',
          'detail_orders.quantity', 'detail_orders.size', 'detail_orders.color',
           'detail_orders.total_price','products.img_product')
+        ->where('detail_orders.code_order',$order->code_order)
         ->get();
-          
-        if ($order != null) {
             return view('user/result-search-order',compact('products','order'));
         }else{
             return redirect()->route('user/search-order')->withError('Xin lỗi hệ thống không tìm thấy đơn hàng bạn muốn tra cứu');
