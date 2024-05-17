@@ -49,13 +49,21 @@ class imagesController extends Controller
     //deleteImage
     public function deleteImage($id)
     {
-        $image = Image::find($id);
-        Image::destroy($id);
-        $img_path = public_path('uploads/') . $image->name_img;
-        if (File::exists($img_path)) {
-            File::delete($img_path);
+        $image = Image::find($id); 
+        $product = Product::where('id_product', $image->id_product)->first();
+        if ($product == null) {
+            $img_path = public_path('uploads/') . $image->name_img;
+            Image::destroy($id);
+            if (File::exists($img_path)) {
+
+                File::delete($img_path);
+            }
+            
+            return redirect(route('list-images'))->withSuccess('Xóa thành công!');
+        }else{
+            return redirect(route('list-images'))->withError('Sản phẩm tồn tại , xóa thất bại !!');
         }
-        return redirect(route('list-images'))->withSuccess('Xóa thành công!');
+
     }
     public function viewUpdateImage($id)
     {

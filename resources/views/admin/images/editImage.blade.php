@@ -7,7 +7,7 @@
   @csrf
   <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Thêm hình</h3>
+      <h3 class="card-title">Cập Nhật</h3>
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
           <i class="fas fa-minus"></i>
@@ -34,7 +34,7 @@
           @endif
         </div>
         <div class="form-group">
-          <input type="submit" value="Thêm hình" class="btn btn-success float-right">
+          <input type="submit" value="Cập nhật" class="btn btn-success float-right">
         </div>
       
 

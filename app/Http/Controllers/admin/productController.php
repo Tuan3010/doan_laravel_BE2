@@ -135,7 +135,10 @@ class productController extends Controller
         $product = Product::find($id_product);
         $img = Image::where('name_img', $product->img_product)->first();
         //dd($img);
-        $img->delete();
+        if ($img != null) {
+            # code...
+            $img->delete();
+        }
         Product::destroy($id_product);
         $sizeproduct = new Sizes_Products();
         $sizeproduct->where('id_product',$id_product)->delete();
@@ -239,8 +242,10 @@ class productController extends Controller
               //cập nhật lại table img
         //--xóa
         $img = Image::where('name_img', $product->img_product)->first();
+        if ($img != null){
+            $img->delete();
+        }
         //dd($img);
-        $img->delete();
         //--thêm mới
         $images = new Image();
         $images::create([
