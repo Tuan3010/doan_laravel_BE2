@@ -296,10 +296,10 @@ class OrderController extends Controller
     public function payment(Request $request){
         //Kiểm tra validated
         $requestValidated = $request->validate([
-            'name_buyer' => 'required',
-            'phone' => 'required|numeric',
-            'email' => 'required|email',
-            'address' => 'required'
+            'name_buyer' => 'required|max:50',
+            'phone' => 'required|numeric|min:7|max:11',      
+            'email' => 'required|email|max:100',
+            'address' => 'required|max:255'
         ]);
         $codebill = 'TLS'.rand(0,99999);
         if (Auth::check()) {
