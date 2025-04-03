@@ -297,7 +297,7 @@ class OrderController extends Controller
         //Kiểm tra validated
         $requestValidated = $request->validate([
             'name_buyer' => 'required|max:50',
-            'phone' => 'required|numeric|min:7|max:11',      
+            'phone' => "required|digits_between:10,11",      
             'email' => 'required|email|max:100',
             'address' => 'required|max:255'
         ]);

@@ -14,26 +14,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Nguyễn Duy Tuấn',
-            'email' => 'duytuan@gmail.com',
-            'user_name' => 'admin1',
-            'role' => 0,
-            'password' => Hash::make('123456'),
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Nguyễn Quốc Lượng',
-            'email' => 'quocluong@gmail.com',
-            'user_name' => 'admin2',
-            'role' => 0,
-            'password' => Hash::make('123456'),
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Đặng Văn Sang',
-            'email' => 'vansang@gmail.com',
-            'user_name' => 'admin3',
-            'role' => 0,
-            'password' => Hash::make('123456'),
-        ]);
+        DB::table('users')->updateOrInsert(
+            ['email' => 'duytuan@gmail.com'],
+            [
+                'name' => 'Nguyễn Duy Tuấn',
+                'user_name' => 'admin1',
+                'role' => 0,
+                'password' => Hash::make('123456')
+            ]
+            
+        );
+        DB::table('users')->updateOrInsert(
+            ['email' => 'quocluong@gmail.com'],
+            [
+                'name' => 'Nguyễn Quốc Lượng',
+                'user_name' => 'admin2',
+                'role' => 0,
+                'password' => Hash::make('123456'),
+            ]
+        );
     }
 }
